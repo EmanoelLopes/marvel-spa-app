@@ -8,7 +8,8 @@ function App() {
       .then(({ data }) => {
         const { results } = data.data;
         console.log(results);
-      }).catch((e) => {
+      })
+      .catch((e) => {
         console.log(e);
       });
   }, []);

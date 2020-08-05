@@ -1,10 +1,7 @@
 import axios from 'axios';
 import config from './config';
 
-const {
-  REACT_APP_MARVEL_SERVICE_ENDPOINT,
-  REACT_APP_MARVEL_API_KEY,
-} = config;
+const { REACT_APP_MARVEL_SERVICE_ENDPOINT, REACT_APP_MARVEL_API_KEY } = config;
 
 const endpoint = REACT_APP_MARVEL_SERVICE_ENDPOINT;
 
@@ -18,7 +15,7 @@ const params = {
 
 const headers = {
   'Content-Type': 'application/json; charset=UTF-8',
-  'Accept': '*/*',
+  Accept: '*/*',
 };
 
 const instance = axios.create({
@@ -27,9 +24,7 @@ const instance = axios.create({
 });
 
 const getHeroes = async () => await instance.get(apiRoutes.characters, { params });
-const getHero = async (id) => await instance.get(apiRoutes.characters`/${id}`, { params });
+const getHero = async (id) =>
+  await instance.get(apiRoutes.characters`/${id}`, { params });
 
-export {
-  getHero,
-  getHeroes,
-};
+export { getHero, getHeroes };
