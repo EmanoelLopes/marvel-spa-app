@@ -24,7 +24,6 @@ const instance = axios.create({
 });
 
 const getHeroes = async () => await instance.get(apiRoutes.characters, { params });
-const getHero = async (id) =>
-  await instance.get(apiRoutes.characters`/${id}`, { params });
+const getHero = async (id) => await instance.get(`${apiRoutes.characters}/${id}`, { params });
 
 export { getHero, getHeroes };

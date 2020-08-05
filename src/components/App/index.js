@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import GlobalStyle from 'styles';
-import { getHeroes } from 'utils/request';
+import { getHero } from 'utils/request';
 
 function App() {
   useEffect(() => {
-    getHeroes()
+    getHero(1011334)
       .then(({ data }) => {
         const { results } = data.data;
         console.log(results);
