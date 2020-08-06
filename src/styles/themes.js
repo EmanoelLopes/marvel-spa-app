@@ -1,6 +1,7 @@
-export const themes = {
+const themes = {
   main: {
     colors: {
+      white: '#ffffff',
       red: '#ff1510',
       pink: '#fdccec',
       lightGreen: '#e7f6e7',
@@ -10,3 +11,5 @@ export const themes = {
     },
   },
 };
+
+export default themes;

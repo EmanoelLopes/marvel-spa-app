@@ -1,18 +1,11 @@
-import { createGlobalStyle } from 'styled-components';
-import { normalize } from 'styled-normalize';
+import GlobalStyles from './globalStyles';
+import themes from './themes';
+import media from './media';
+import sizes from './sizes';
 
-const GlobalStyle = createGlobalStyle`
-  ${normalize}
-
-  html, body {
-    font-family: 'Work Sans', sans-serif;
-    height: 100%;
-    width: 100%;
-  }
-
-  body {
-    padding: 0;
-  }
-`;
-
-export default GlobalStyle;
+export {
+  GlobalStyles,
+  themes,
+  media,
+  sizes,
+};
