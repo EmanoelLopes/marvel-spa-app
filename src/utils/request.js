@@ -16,7 +16,7 @@ const params = {
 
 const headers = {
   'Content-Type': 'application/json; charset=UTF-8',
-  'Accept': '*/*',
+  Accept: '*/*',
 };
 
 const instance = axios.create({

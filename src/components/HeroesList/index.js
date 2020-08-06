@@ -1,6 +1,8 @@
 import React from 'react';
 import { array } from 'prop-types';
 import { Link } from 'react-router-dom';
+import { ReactComponent as HeartEmpty } from 'assets/icons/heart-empty.svg';
+// import { ReactComponent as HeartFull } from 'assets/icons/heart-full.svg';
 import * as S from './styles';
 
 const HeroesList = ({ heroes }) => {
@@ -13,7 +15,10 @@ const HeroesList = ({ heroes }) => {
               bg={`${hero.thumbnail?.path}.${hero.thumbnail?.extension}`}
               title={hero.name}
             />
-            <span>{hero.name}</span>
+            <S.ListeItemHerosDetails>
+              <span>{hero.name}</span>
+              <span>{<HeartEmpty />}</span>
+            </S.ListeItemHerosDetails>
           </S.ListItem>
         </Link>
       ))}

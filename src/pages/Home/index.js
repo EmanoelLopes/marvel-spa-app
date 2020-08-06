@@ -14,9 +14,10 @@ const Home = () => {
       .then(({ data }) => {
         const { results } = data.data;
         setHeroes(results);
-    }).catch((e) => {
-      console.log(e);
-    });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   const handleChange = (e) => {

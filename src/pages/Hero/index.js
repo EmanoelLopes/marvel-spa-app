@@ -24,9 +24,7 @@ const Hero = () => {
   return (
     <div>
       <Link to="/">Voltar</Link>
-      <h1>
-        {hero.name}
-      </h1>
+      <h1>{hero.name}</h1>
     </div>
   );
 };
