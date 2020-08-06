@@ -2,19 +2,20 @@ import styled from 'styled-components';
 import { themes } from 'styles';
 
 export const FooterWrapper = styled.footer`
-  display: flex;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 60px;
   background-color: ${themes.main.colors.red};
+  display: flex;
+  justify-content: center;
+  padding: 16px 0;
+  width: 100%;
 
   p {
-    text-align: center;
     margin: 0;
+    text-align: center;
 
     a {
       color: ${themes.main.colors.white};
+      display: block;
     }
 
     a:hover {
