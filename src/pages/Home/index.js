@@ -52,14 +52,9 @@ const Home = () => {
           onClick={handleClick}
           onKeyDown={handleKeyDown}
         />
-        <Filters
-          amount={heroes.length}
-          onClick={() => console.log('toggle!')}
-        />
+        <Filters amount={heroes.length} onClick={() => console.log('toggle!')} />
         {isLoading && <Loader />}
-        <HeroesList
-          heroes={heroes}
-        />
+        <HeroesList heroes={heroes} />
       </S.Container>
       <Footer />
     </S.Wrapper>

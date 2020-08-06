@@ -14,9 +14,9 @@ const Filters = ({ amount, onClick }) => {
           <HeroIcon /> Ordenar por nome - A/Z
         </span>
         <Toggle onClick={onClick} />
-        <span>
+        <S.SelectFavorites>
           <HeartFull /> Somente Favoritos
-        </span>
+        </S.SelectFavorites>
       </S.ToggleSorter>
     </S.FiltersSection>
   );

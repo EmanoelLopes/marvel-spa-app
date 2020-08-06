@@ -26,7 +26,7 @@ export const ToggleSorter = styled.div`
 
   > span {
     align-items: center;
-    color: ${lighten(.1, themes.main.colors.red)};
+    color: ${lighten(0.1, themes.main.colors.red)};
     display: flex;
     margin: 0 8px;
 
@@ -36,3 +36,10 @@ export const ToggleSorter = styled.div`
   }
 `;
 
+export const SelectFavorites = styled.span`
+  background-color: ${lighten(0.2, themes.main.colors.lightGrey)};
+  border-radius: 20px;
+  cursor: pointer;
+  height: 34px;
+  padding: 0 8px;
+`;

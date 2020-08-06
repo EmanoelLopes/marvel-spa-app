@@ -29,7 +29,7 @@ export const SwitchToggle = styled.label`
 `;
 
 export const SliderToggle = styled.span`
-  background-color: ${lighten(.2, themes.main.colors.lightGrey)};
+  background-color: ${lighten(0.2, themes.main.colors.lightGrey)};
   border-radius: 34px;
   bottom: 0;
   cursor: pointer;
@@ -37,18 +37,17 @@ export const SliderToggle = styled.span`
   position: absolute;
   right: 0;
   top: 0;
-  transition: .4s;
+  transition: 0.4s;
 
   &::before {
     background-color: ${themes.main.colors.red};
     border-radius: 50%;
     bottom: 4px;
-    content: "";
+    content: '';
     height: 26px;
     left: 4px;
     position: absolute;
-    transition: .4s;
+    transition: 0.4s;
     width: 26px;
   }
 `;
-
