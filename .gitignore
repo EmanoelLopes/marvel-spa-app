@@ -25,3 +25,4 @@ yarn-error.log*
 
 # App folders
 /guides
+/cypress/integration/examples

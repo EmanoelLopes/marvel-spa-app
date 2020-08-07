@@ -23,6 +23,7 @@
     "test:verbose": "yarn test --verbose",
     "test:no-watch": "yarn test --no-watch",
     "test:coverage": "yarn test --coverage --env=jsdom",
+    "test:e2e": "cypress open",
     "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
     "eject": "react-scripts eject",
     "lint": "eslint ./src",
