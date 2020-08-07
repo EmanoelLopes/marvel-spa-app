@@ -23,6 +23,10 @@ export const List = styled.ul`
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows:    repeat(4, 300px);
   `}
+
+  > a {
+    min-width: 220px;
+  }
 `;
 
 export const ListItem = styled.li`
