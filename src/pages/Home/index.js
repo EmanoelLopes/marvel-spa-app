@@ -34,7 +34,7 @@ const Home = () => {
   };
 
   const toggleSorted = () => {
-    setIsSorted(isSorted => !isSorted);
+    setIsSorted((isSorted) => !isSorted);
     setHeroes(heroes.reverse());
   };
 

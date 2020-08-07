@@ -10,20 +10,18 @@ const HeroesList = ({ heroes, value }) => {
 
   return (
     <S.List>
-      {heroes
-        .filter(filterdHeroes)
-        .map((hero) => (
-          <Link key={hero.id} to={`/hero/${hero.id}`}>
-            <S.ListItem>
-              <S.ListItemImage
-                bg={`${hero.thumbnail?.path}.${hero.thumbnail?.extension}`}
-                title={hero.name}
-              />
-              <S.ListeItemHerosDetails>
-                <span>{hero.name}</span>
-                <span>{<HeartEmpty />}</span>
-              </S.ListeItemHerosDetails>
-            </S.ListItem>
+      {heroes.filter(filterdHeroes).map((hero) => (
+        <Link key={hero.id} to={`/hero/${hero.id}`}>
+          <S.ListItem>
+            <S.ListItemImage
+              bg={`${hero.thumbnail?.path}.${hero.thumbnail?.extension}`}
+              title={hero.name}
+            />
+            <S.ListeItemHerosDetails>
+              <span>{hero.name}</span>
+              <span>{<HeartEmpty />}</span>
+            </S.ListeItemHerosDetails>
+          </S.ListItem>
         </Link>
       ))}
     </S.List>
