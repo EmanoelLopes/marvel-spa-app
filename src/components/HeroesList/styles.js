@@ -29,6 +29,8 @@ export const List = styled.ul`
   }
   
   &[data-only-favorites="true"] {
+    grid-template-rows:    repeat(1, 300px);
+
     > li[data-is-favorite="false"] {
       display: none;
     }

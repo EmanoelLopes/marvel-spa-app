@@ -1,5 +1,3 @@
 import HeroesContext from './Heroes.context';
 
-export {
-  HeroesContext,
-};
+export { HeroesContext };

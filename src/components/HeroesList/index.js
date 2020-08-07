@@ -16,12 +16,10 @@ const HeroesList = ({ heroes, value, onlyFavorites }) => {
     };
 
     const addValues = () => {
-      return (favorites.length < 5) && setFavorites(favorites.concat(id));
+      return favorites.length < 5 && setFavorites(favorites.concat(id));
     };
 
-    return (favorites.includes(id))
-      ? removeValues()
-      : addValues();
+    return favorites.includes(id) ? removeValues() : addValues();
   };
 
   return (

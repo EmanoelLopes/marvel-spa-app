@@ -31,7 +31,7 @@ const Home = () => {
   };
 
   const toggleFavorites = () => {
-    setShowOnlyFavorites(showOnlyFavorites => !showOnlyFavorites);
+    setShowOnlyFavorites((showOnlyFavorites) => !showOnlyFavorites);
   };
 
   const toggleSorted = () => {
