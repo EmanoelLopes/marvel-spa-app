@@ -11,6 +11,8 @@ import * as S from 'styles/styled';
 const Home = () => {
   const [heroes, setHeroes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+  const [, setIsSorted] = useState(false);
 
   const getHeroesList = () => {
     setIsLoading(true);
@@ -27,12 +29,17 @@ const Home = () => {
       });
   };
 
-  const handleChange = (e) => {
-    console.log(e.target.value);
+  const handleClick = () => {
+    console.log('click!');
   };
 
-  const handleClick = (e) => {
-    console.log('click!');
+  const toggleSorted = () => {
+    setIsSorted(isSorted => !isSorted);
+    setHeroes(heroes.reverse());
+  };
+
+  const handleChange = (e) => {
+    setSearchValue(e.target.value);
   };
 
   const handleKeyDown = (e) => {
@@ -52,9 +59,9 @@ const Home = () => {
           onClick={handleClick}
           onKeyDown={handleKeyDown}
         />
-        <Filters amount={heroes.length} onClick={() => console.log('toggle!')} />
+        <Filters amount={heroes.length} onClick={toggleSorted} />
         {isLoading && <Loader />}
-        <HeroesList heroes={heroes} />
+        <HeroesList heroes={heroes} value={searchValue} />
       </S.Container>
       <Footer />
     </S.Wrapper>
