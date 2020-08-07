@@ -27,6 +27,12 @@ export const List = styled.ul`
   > a {
     min-width: 220px;
   }
+  
+  &[data-only-favorites="true"] {
+    > li[data-is-favorite="false"] {
+      display: none;
+    }
+  }
 `;
 
 export const ListItem = styled.li`
@@ -35,6 +41,7 @@ export const ListItem = styled.li`
   height: 100%;
   justify-content: space-between;
   list-style: none;
+  width: 220px;
 `;
 
 export const ListItemImage = styled.div`
@@ -48,8 +55,17 @@ export const ListItemImage = styled.div`
 `;
 
 export const ListeItemHerosDetails = styled.div`
-  display: flex;
   align-items: center;
-  justify-content: space-between;
+  display: flex;
   height: 50px;
+  justify-content: space-between;
+`;
+
+export const ToggleFavorite = styled.button`
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
 `;

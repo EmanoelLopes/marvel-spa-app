@@ -36,10 +36,19 @@ export const ToggleSorter = styled.div`
   }
 `;
 
-export const SelectFavorites = styled.span`
+export const SelectFavorites = styled.button`
+  align-items: center;
   background-color: ${lighten(0.2, themes.main.colors.lightGrey)};
   border-radius: 20px;
+  border: none;
+  color: ${lighten(0.1, themes.main.colors.red)};
   cursor: pointer;
+  display: inline-flex;
   height: 34px;
+  margin: 0 0 0 8px;
   padding: 0 8px;
+
+  svg {
+    margin: 0 8px;
+  }
 `;

@@ -2,17 +2,17 @@ import React from 'react';
 import { func } from 'prop-types';
 import * as S from './styles';
 
-const Toggle = ({ onClick }) => {
+const Toggle = ({ toggle }) => {
   return (
     <S.SwitchToggle>
       <input type="checkbox" />
-      <S.SliderToggle onClick={onClick} />
+      <S.SliderToggle onClick={toggle} />
     </S.SwitchToggle>
   );
 };
 
 Toggle.propTypes = {
-  onClick: func.isRequired,
+  toggle: func.isRequired,
 };
 
 export default Toggle;

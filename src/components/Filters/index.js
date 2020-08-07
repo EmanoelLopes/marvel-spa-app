@@ -5,7 +5,7 @@ import { ReactComponent as HeroIcon } from 'assets/icons/hero.svg';
 import { ReactComponent as HeartFull } from 'assets/icons/heart-full.svg';
 import * as S from './styles';
 
-const Filters = ({ amount, onClick }) => {
+const Filters = ({ amount, onClick, selectFavorites }) => {
   return (
     <S.FiltersSection>
       <span>Encontrados {amount} heróis</span>
@@ -13,8 +13,8 @@ const Filters = ({ amount, onClick }) => {
         <span>
           <HeroIcon /> Ordenar por nome - A/Z
         </span>
-        <Toggle onClick={onClick} />
-        <S.SelectFavorites>
+        <Toggle toggle={onClick} />
+        <S.SelectFavorites onClick={selectFavorites}>
           <HeartFull /> Somente Favoritos
         </S.SelectFavorites>
       </S.ToggleSorter>
@@ -25,6 +25,7 @@ const Filters = ({ amount, onClick }) => {
 Filters.propTypes = {
   amount: number.isRequired,
   onClick: func.isRequired,
+  selectFavorites: func.isRequired,
 };
 
 export default Filters;

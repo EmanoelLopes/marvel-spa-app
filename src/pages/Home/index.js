@@ -12,6 +12,7 @@ const Home = () => {
   const [heroes, setHeroes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchValue, setSearchValue] = useState('');
+  const [showOnlyFavorites, setShowOnlyFavorites] = useState(false);
   const [, setIsSorted] = useState(false);
 
   const getHeroesList = () => {
@@ -29,13 +30,17 @@ const Home = () => {
       });
   };
 
-  const handleClick = () => {
-    console.log('click!');
+  const toggleFavorites = () => {
+    setShowOnlyFavorites(showOnlyFavorites => !showOnlyFavorites);
   };
 
   const toggleSorted = () => {
     setIsSorted((isSorted) => !isSorted);
     setHeroes(heroes.reverse());
+  };
+
+  const handleClick = () => {
+    console.log('click!');
   };
 
   const handleChange = (e) => {
@@ -59,9 +64,17 @@ const Home = () => {
           onClick={handleClick}
           onKeyDown={handleKeyDown}
         />
-        <Filters amount={heroes.length} onClick={toggleSorted} />
+        <Filters
+          amount={heroes.length}
+          onClick={toggleSorted}
+          selectFavorites={toggleFavorites}
+        />
         {isLoading && <Loader />}
-        <HeroesList heroes={heroes} value={searchValue} />
+        <HeroesList
+          heroes={heroes}
+          value={searchValue}
+          onlyFavorites={showOnlyFavorites}
+        />
       </S.Container>
       <Footer />
     </S.Wrapper>
