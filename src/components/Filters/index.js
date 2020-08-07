@@ -6,12 +6,7 @@ import { ReactComponent as HeartFull } from 'assets/icons/heart-full.svg';
 import { ReactComponent as HeartEmpty } from 'assets/icons/heart-empty.svg';
 import * as S from './styles';
 
-const Filters = ({
-  amount,
-  onClick,
-  selectFavorites,
-  onlyFavorites,
-}) => {
+const Filters = ({ amount, onClick, selectFavorites, onlyFavorites }) => {
   return (
     <S.FiltersSection>
       <span>Encontrados {amount} heróis</span>

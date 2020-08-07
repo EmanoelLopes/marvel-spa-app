@@ -47,11 +47,11 @@ export const SelectFavorites = styled.button`
   margin: 0 0 0 8px;
   padding: 0 8px;
 
-  &[data-only-favorites="false"] {
+  &[data-only-favorites='false'] {
     background-color: ${themes.main.colors.white};
   }
 
-  &[data-only-favorites="true"] {
+  &[data-only-favorites='true'] {
     background-color: ${lighten(0.2, themes.main.colors.lightGrey)};
   }
 
