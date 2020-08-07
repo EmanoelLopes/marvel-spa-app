@@ -67,6 +67,7 @@ const Home = () => {
         <Filters
           amount={heroes.length}
           onClick={toggleSorted}
+          onlyFavorites={showOnlyFavorites}
           selectFavorites={toggleFavorites}
         />
         {isLoading && <Loader />}
