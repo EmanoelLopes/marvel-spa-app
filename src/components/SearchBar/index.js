@@ -10,6 +10,7 @@ const SearchBar = ({ onChange, onClick, onKeyDown }) => {
         <SearchIcon />
       </S.SearchButton>
       <S.SearchInput
+        data-test-id="SearchBar"
         type="text"
         placeholder="Procure por heróis"
         onChange={onChange}

@@ -4,7 +4,7 @@ import { themes } from 'styles';
 
 export const AlertText = styled.p`
   padding: 24px;
-  background-color: ${lighten(.4, themes.main.colors.red)};
+  background-color: ${lighten(0.4, themes.main.colors.red)};
   color: ${themes.main.colors.red};
   margin: 36px;
 `;

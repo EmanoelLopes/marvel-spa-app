@@ -6,23 +6,27 @@ import { ReactComponent as HeartFull } from 'assets/icons/heart-full.svg';
 import { ReactComponent as HeartEmpty } from 'assets/icons/heart-empty.svg';
 import * as S from './styles';
 
-const Filters = ({ amount, onClick, selectFavorites, onlyFavorites }) => {
-  return (
-    <S.FiltersSection>
-      <span>Encontrados {amount} heróis</span>
-      <S.ToggleSorter>
-        <span>
-          <HeroIcon /> Ordenar por nome - A/Z
-        </span>
-        <Toggle toggle={onClick} />
-        <S.SelectFavorites data-only-favorites={onlyFavorites} onClick={selectFavorites}>
-          {onlyFavorites ? <HeartFull /> : <HeartEmpty />}
-          <span>Somente Favoritos</span>
-        </S.SelectFavorites>
-      </S.ToggleSorter>
-    </S.FiltersSection>
-  );
-};
+const Filters = ({
+  amount,
+  onClick,
+  selectFavorites,
+  onlyFavorites,
+}) => (
+  <S.FiltersSection>
+    <span>Encontrados {amount} heróis</span>
+    <S.ToggleSorter>
+      <span>
+        <HeroIcon /> Ordenar por nome - A/Z
+      </span>
+      <Toggle toggle={onClick} />
+      <S.SelectFavorites data-only-favorites={onlyFavorites} onClick={selectFavorites}>
+        {onlyFavorites ? <HeartFull /> : <HeartEmpty />}
+        <span>Somente Favoritos</span>
+      </S.SelectFavorites>
+    </S.ToggleSorter>
+  </S.FiltersSection>
+);
+
 
 Filters.propTypes = {
   amount: number.isRequired,

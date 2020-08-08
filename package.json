@@ -39,7 +39,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint && yarn format"
+      "pre-commit": "yarn lint"
     }
   },
   "jest": {
@@ -63,7 +63,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "cypress": "^4.12.0",
+    "cypress": "^4.12.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "^7.6.0",

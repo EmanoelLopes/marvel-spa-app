@@ -28,7 +28,7 @@ const HeroesList = ({ heroes, value, onlyFavorites }) => {
       {onlyFavorites && !favorites.length && (
         <Alert message={'Você não tem nenhum favorito selecionado!'} />
       )}
-      <S.List data-only-favorites={onlyFavorites}>
+      <S.List data-only-favorites={onlyFavorites} data-test-id="HeroesList">
         {heroes.filter(filterdHeroes).map((hero) => (
           <S.ListItem key={hero.id} data-is-favorite={favorites.includes(hero.id)}>
             <Link key={hero.id} to={`/hero/${hero.id}`}>
