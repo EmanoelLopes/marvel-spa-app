@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Alert from 'components/Alert';
 import { ReactComponent as HeartEmpty } from 'assets/icons/heart-empty.svg';
 import { ReactComponent as HeartFull } from 'assets/icons/heart-full.svg';
-import { useLocalStorage } from '../hooks';
+import { useLocalStorage } from 'hooks';
 import * as S from './styles';
 
 const HeroesList = ({ heroes, value, onlyFavorites }) => {
@@ -18,7 +18,7 @@ const HeroesList = ({ heroes, value, onlyFavorites }) => {
       const newFavorites = favorites.filter((item) => favorites[elementIndex] !== item);
       setFavorites(newFavorites);
       setStoreValue(newFavorites);
-      return;
+      return false;
     };
 
     const addValues = () => {
@@ -27,7 +27,7 @@ const HeroesList = ({ heroes, value, onlyFavorites }) => {
         setFavorites(newFavorites);
         setStoreValue(newFavorites);
       };
-      return;
+      return false;
     };
 
     return favorites.includes(id) ? removeValues() : addValues();
