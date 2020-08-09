@@ -23,9 +23,21 @@ const GlobalStyle = createGlobalStyle`
     margin-top: 0;
   }
 
+  p {
+    color: ${themes.main.colors.darkGrey};
+  }
+
   a {
-    text-decoration: none;
     color: ${themes.main.colors.red};
+    text-decoration: none;
+  }
+
+  ul {
+    padding: 0;
+  }
+
+  ul, li {
+    list-style: none;
   }
 `;
 

@@ -42,7 +42,6 @@ export const ListItem = styled.li`
   flex-direction: column;
   height: 100%;
   justify-content: space-between;
-  list-style: none;
   width: 220px;
 `;
 

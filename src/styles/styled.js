@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { media, sizes } from 'styles';
+import { themes, media, sizes } from 'styles';
 
 export const Container = styled.div`
   align-items: center;
@@ -15,6 +15,7 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div`
+  background-color: ${props => props.hero && themes.main.colors.lightGreen};
   height: 100vh;
   overflow: auto;
   width: 100vw;

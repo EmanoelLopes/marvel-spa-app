@@ -4,20 +4,30 @@ import { Link } from 'react-router-dom';
 import Alert from 'components/Alert';
 import { ReactComponent as HeartEmpty } from 'assets/icons/heart-empty.svg';
 import { ReactComponent as HeartFull } from 'assets/icons/heart-full.svg';
+import { useLocalStorage } from '../hooks';
 import * as S from './styles';
 
 const HeroesList = ({ heroes, value, onlyFavorites }) => {
   const [favorites, setFavorites] = useState([]);
+  const [storedValue, setStoreValue] = useLocalStorage([], 'storeFavorites');
   const filterdHeroes = (hero) => hero.name.toLowerCase().includes(value.toLowerCase());
 
   const toggleToFavorites = (id) => {
     const removeValues = () => {
       const elementIndex = favorites.findIndex((i) => i === id);
-      return setFavorites(favorites.filter((item) => favorites[elementIndex] !== item));
+      const newFavorites = favorites.filter((item) => favorites[elementIndex] !== item);
+      setFavorites(newFavorites);
+      setStoreValue(newFavorites);
+      return;
     };
 
     const addValues = () => {
-      return favorites.length < 5 && setFavorites(favorites.concat(id));
+      const newFavorites = favorites.concat(id);
+      if (newFavorites.length <= 5) {
+        setFavorites(newFavorites);
+        setStoreValue(newFavorites);
+      };
+      return;
     };
 
     return favorites.includes(id) ? removeValues() : addValues();
@@ -25,12 +35,12 @@ const HeroesList = ({ heroes, value, onlyFavorites }) => {
 
   return (
     <Fragment>
-      {onlyFavorites && !favorites.length && (
+      {onlyFavorites && !storedValue.length && (
         <Alert message={'Você não tem nenhum favorito selecionado!'} />
       )}
       <S.List data-only-favorites={onlyFavorites} data-test-id="HeroesList">
         {heroes.filter(filterdHeroes).map((hero) => (
-          <S.ListItem key={hero.id} data-is-favorite={favorites.includes(hero.id)}>
+          <S.ListItem key={hero.id} data-is-favorite={storedValue.includes(hero.id)}>
             <Link key={hero.id} to={`/hero/${hero.id}`}>
               <S.ListItemImage
                 bg={`${hero.thumbnail?.path}.${hero.thumbnail?.extension}`}
@@ -39,8 +49,12 @@ const HeroesList = ({ heroes, value, onlyFavorites }) => {
             </Link>
             <S.ListeItemHerosDetails>
               <span>{hero.name}</span>
-              <S.ToggleFavorite onClick={() => toggleToFavorites(hero.id)}>
-                {favorites.includes(hero.id) ? <HeartFull /> : <HeartEmpty />}
+              <S.ToggleFavorite
+                onClick={() => {
+                  toggleToFavorites(hero.id);
+                }}
+              >
+                {storedValue.includes(hero.id) ? <HeartFull /> : <HeartEmpty />}
               </S.ToggleFavorite>
             </S.ListeItemHerosDetails>
           </S.ListItem>

@@ -1,10 +1,11 @@
-import React, { Fragment, useState, useEffect, useCallback } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useParams } from 'react-router-dom';
 import Header from 'components/Header';
 import Main from 'components/Main';
 import Footer from 'components/Footer';
 import Loader from 'components/Loader';
 import Alert from 'components/Alert';
+import HeroContainer from 'components/HeroContainer';
 import { getHero } from 'utils/request';
 import * as S from 'styles/styled';
 
@@ -42,29 +43,15 @@ const Hero = () => {
   }, [getHeroData, id]);
 
   return (
-    <S.Wrapper>
+    <S.Wrapper hero>
       <S.Container>
         <Header />
-        <Link to="/">Voltar</Link>
         {isLoading && <Loader />}
         <Main>
           {error.hasError ? (
             <Alert message={`Error ${error.statusCode}: ${error.message}`} />
           ) : (
-            <Fragment>
-              <h1>{hero.name}</h1>
-              <img
-                src={`${hero.thumbnail?.path}.${hero.thumbnail?.extension}`}
-                alt={hero.name}
-              />
-              <p>{hero.description}</p>
-              <h2>Últimos lançamentos</h2>
-              <ul>
-                {hero.comics?.items.map((item) => (
-                  <li key={item.resourceURI}>{item.name}</li>
-                ))}
-              </ul>
-            </Fragment>
+            <HeroContainer data={hero} />
           )}
         </Main>
       </S.Container>
