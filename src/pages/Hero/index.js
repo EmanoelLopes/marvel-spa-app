@@ -32,8 +32,8 @@ const Hero = () => {
         setIsLoading(false);
         setError({
           hasError: true,
-          statusCode: response.status,
-          message: response.data.message,
+          statusCode: response?.status,
+          message: response?.data?.message,
         });
       });
   }, []);

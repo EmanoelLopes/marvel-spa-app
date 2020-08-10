@@ -18,8 +18,12 @@ const Filters = ({
       <span>
         <HeroIcon /> Ordenar por nome - A/Z
       </span>
-      <Toggle toggle={onClick} />
-      <S.SelectFavorites data-only-favorites={onlyFavorites} onClick={selectFavorites}>
+      <Toggle toggle={onClick} dataTestId="SortByName"/>
+      <S.SelectFavorites
+        data-only-favorites={onlyFavorites}
+        onClick={selectFavorites}
+        data-test-id="ShowOnlyFavorites"
+      >
         {onlyFavorites ? <HeartFull /> : <HeartEmpty />}
         <span>Somente Favoritos</span>
       </S.SelectFavorites>

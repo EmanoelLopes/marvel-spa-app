@@ -35,8 +35,8 @@ const Home = () => {
         .catch(({ response }) => {
           setError({
             hasError: true,
-            statusCode: response.status,
-            message: response.data.message,
+            statusCode: response?.status,
+            message: response?.data.message,
           });
           setIsLoading(false);
         });
