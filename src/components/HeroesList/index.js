@@ -36,7 +36,10 @@ const HeroesList = ({ heroes, value, onlyFavorites }) => {
   return (
     <Fragment>
       {onlyFavorites && !storedValue.length && (
-        <Alert message={'Você não tem nenhum favorito selecionado!'} />
+        <Alert
+          message={'Você não tem nenhum favorito selecionado!'}
+          messageId="ShowOnlyFavoritesAlert"
+        />
       )}
       <S.List data-only-favorites={onlyFavorites} data-test-id="HeroesList">
         {heroes.filter(filterdHeroes).map((hero) => (
@@ -53,6 +56,7 @@ const HeroesList = ({ heroes, value, onlyFavorites }) => {
                 onClick={() => {
                   toggleToFavorites(hero.id);
                 }}
+                data-test-id={`hero-${hero.id}`}
               >
                 {storedValue.includes(hero.id) ? <HeartFull /> : <HeartEmpty />}
               </S.ToggleFavorite>

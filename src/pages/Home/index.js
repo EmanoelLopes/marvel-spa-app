@@ -87,7 +87,10 @@ const Home = () => {
         <Main>
           {isLoading && <Loader />}
           {error.hasError ? (
-            <Alert message={`Error ${error.statusCode}: ${error.message}`} />
+            <Alert
+              message={`Error ${error.statusCode}: ${error.message}`}
+              messageId={`error-${error.statusCode}`}
+            />
           ) : (
             <HeroesList
               heroes={heroes}

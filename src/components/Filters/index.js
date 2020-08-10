@@ -24,7 +24,10 @@ const Filters = ({
         onClick={selectFavorites}
         data-test-id="ShowOnlyFavorites"
       >
-        {onlyFavorites ? <HeartFull /> : <HeartEmpty />}
+        {(onlyFavorites)
+          ? <HeartFull data-test-id="HeartFullIcon" />
+          : <HeartEmpty data-test-id="HeartEmptyIcon" />
+        }
         <span>Somente Favoritos</span>
       </S.SelectFavorites>
     </S.ToggleSorter>

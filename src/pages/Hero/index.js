@@ -49,7 +49,10 @@ const Hero = () => {
         {isLoading && <Loader />}
         <Main>
           {error.hasError ? (
-            <Alert message={`Error ${error.statusCode}: ${error.message}`} />
+            <Alert
+              message={`Error ${error.statusCode}: ${error.message}`}
+              messageId={`error-${error.statusCode}`}
+            />
           ) : (
             <HeroContainer data={hero} />
           )}

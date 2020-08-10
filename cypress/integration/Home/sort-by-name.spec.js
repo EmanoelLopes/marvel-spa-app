@@ -50,7 +50,6 @@ context('Sort by Name', () => {
       .should('have.text', 'Jessica Jones');
 
     cy
-      .wait(2000)
       .get('[data-test-id="SortByName"]')
       .click();
 
@@ -67,5 +66,19 @@ context('Sort by Name', () => {
     cy
       .get('[data-test-id="SearchBar"]')
       .clear();
+
+    cy
+      .get('[data-test-id="SortByName"]')
+      .click();
+
+    cy
+      .get('[data-test-id="HeroesList"] > li span')
+      .first()
+      .should('have.text', 'Avengers');
+
+    cy
+      .get('[data-test-id="HeroesList"] > li span')
+      .last()
+      .should('have.text', 'Jessica Jones');
   });
 });
