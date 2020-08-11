@@ -22,7 +22,8 @@ Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## !Important
-This appliction uses enviroment variables as the [Marvel API](https://developer.marvel.com/) apikey, so you need to include a `.env` file with the following `.env.sample` file:
+
+This application uses enviroment variables as the [Marvel API](https://developer.marvel.com/) apikey, so you need to include a `.env` file with the following `.env.sample` file:
 ```
 SKIP_PREFLIGHT_CHECK=true
 REACT_APP_MARVEL_SERVICE_ENDPOINT=https://gateway.marvel.com/
