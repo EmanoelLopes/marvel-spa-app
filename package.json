@@ -19,10 +19,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "test:verbose": "yarn test --verbose",
     "test:no-watch": "yarn test --no-watch",
-    "test:coverage": "yarn test --coverage --env=jsdom",
+    "test:coverage": "yarn test test --coverage --watchAll=false",
+    "test:unit": "yarn test --verbose",
     "test:e2e": "cypress open",
     "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
     "eject": "react-scripts eject",
@@ -42,13 +43,6 @@
       "pre-commit": "yarn lint"
     }
   },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx}",
-      "!src/*.{js}",
-      "!src/utils/*.{js}"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -63,6 +57,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
+    "babel-jest": "^26.3.0",
     "cypress": "^4.12.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",

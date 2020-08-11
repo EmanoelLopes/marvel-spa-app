@@ -8,8 +8,8 @@ import { useLocalStorage } from 'hooks';
 import * as S from './styles';
 
 const HeroesList = ({ heroes, value, onlyFavorites }) => {
-  const [favorites, setFavorites] = useState([]);
-  const [storedValue, setStoreValue] = useLocalStorage([], 'storeFavorites');
+  const [storedValue, setStoreValue] = useLocalStorage([], 'favorites');
+  const [favorites, setFavorites] = useState(storedValue || []);
   const filterdHeroes = (hero) => hero.name.toLowerCase().includes(value.toLowerCase());
 
   const toggleToFavorites = (id) => {
