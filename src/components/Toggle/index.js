@@ -1,19 +1,16 @@
 import React from 'react';
-import { func, string } from 'prop-types';
+import { func } from 'prop-types';
 import * as S from './styles';
 
-const Toggle = ({ toggle, dataTestId }) => {
+export function Toggle({ toggle }) {
   return (
-    <S.SwitchToggle>
+    <S.SwitchToggle data-testid="msh--toggle">
       <input type="checkbox" />
-      <S.SliderToggle onClick={toggle} data-test-id={dataTestId} />
+      <S.SliderToggle onClick={toggle} data-testid="msh--toggle-label" />
     </S.SwitchToggle>
   );
-};
+}
 
 Toggle.propTypes = {
   toggle: func.isRequired,
-  dataTestId: string.isRequired,
 };
-
-export default Toggle;

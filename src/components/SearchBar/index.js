@@ -1,35 +1,25 @@
 import React from 'react';
 import { func } from 'prop-types';
-import { ReactComponent as SearchIcon } from 'assets/icons/search.svg';
+import { SearchIcon } from 'components/Icons';
 import * as S from './styles';
 
-const SearchBar = ({ onChange, onClick, onKeyDown }) => {
+export function SearchBar({ onChange, onClick }) {
   return (
-    <S.SearchContainer>
-      <S.SearchButton onClick={onClick}>
+    <S.SearchContainer data-testid="msh--searchbar">
+      <S.SearchButton data-testid="msh--searchbar-button" onClick={onClick}>
         <SearchIcon />
       </S.SearchButton>
       <S.SearchInput
-        data-test-id="SearchBar"
+        data-testid="msh--searchbar-input"
         type="text"
         placeholder="Procure por heróis"
         onChange={onChange}
-        onKeyDown={onKeyDown}
       />
     </S.SearchContainer>
   );
-};
-
-SearchBar.defaultProps = {
-  onChange: () => null,
-  onClick: () => null,
-  onKeyDown: () => null,
-};
+}
 
 SearchBar.propTypes = {
-  onChange: func,
-  onClick: func,
-  onKeyDown: func,
+  onChange: func.isRequired,
+  onClick: func.isRequired,
 };
-
-export default SearchBar;

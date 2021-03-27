@@ -1,15 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-import Header from 'components/Header';
-import Main from 'components/Main';
-import Footer from 'components/Footer';
-import Loader from 'components/Loader';
-import Alert from 'components/Alert';
-import HeroContainer from 'components/HeroContainer';
-import { getHero } from 'utils/request';
+import { Header, Main, Footer, Loader, Alert, HeroContainer } from 'components';
+import { getHero } from 'services';
 import * as S from 'styles/styled';
 
-const Hero = () => {
+export function Hero() {
   const [hero, setHero] = useState({});
   const [error, setError] = useState({
     hasError: false,
@@ -43,7 +38,7 @@ const Hero = () => {
   }, [getHeroData, id]);
 
   return (
-    <S.Wrapper hero>
+    <S.Wrapper hero data-testid="msh--page-hero">
       <S.Container>
         <Header />
         {isLoading && <Loader />}
@@ -61,5 +56,4 @@ const Hero = () => {
       <Footer />
     </S.Wrapper>
   );
-};
-export default Hero;
+}

@@ -1,20 +1,15 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import Alert from 'components/Alert';
+import { render, screen } from '@testing-library/react';
+import { Alert } from 'components';
 
-describe('<Alert />', () => {
-  describe('props', () => {
-    const message = 'Oh no, something wrong has hapned! :(';
-    const messageId = 'error-code-409';
-    const wrapper = shallow(<Alert message={message} messageId={messageId}  />);
+describe('[Components] - <Alert />', () => {
+  const props = {
+    message: 'Message default.',
+    id: '1',
+  };
 
-    it('should render the correcly messageId props', () => {
-      expect(wrapper.prop('data-test-id')).toBe(messageId);
-    });
-
-    it('should render the correcly message props', () => {
-      expect(wrapper.props().children).toBe(message);
-    });
+  it('should render Alert without breaking', () => {
+    render(<Alert {...props} />);
+    expect(screen.getByTestId('msh--alert-1')).toBeInTheDocument();
   });
 });
-

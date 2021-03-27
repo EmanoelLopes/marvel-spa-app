@@ -1,5 +1,5 @@
 import axios from 'axios';
-import config from './config';
+import config from 'utils/config';
 
 const { REACT_APP_MARVEL_SERVICE_ENDPOINT, REACT_APP_MARVEL_API_KEY } = config;
 

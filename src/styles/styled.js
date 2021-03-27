@@ -15,7 +15,7 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  background-color: ${props => props.hero && themes.main.colors.lightGreen};
+  background-color: ${(props) => props.hero && themes.main.colors.lightGreen};
   height: 100vh;
   overflow: auto;
   width: 100vw;

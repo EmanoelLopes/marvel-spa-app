@@ -1,11 +1,11 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import Root from 'components/Root';
+import { render } from 'setupTests';
+import { Root } from 'components';
 
-describe('<Root />', () => {
-  it('Should render properly', () => {
-    const wrapper = shallow(<Root />);
-    expect(wrapper.find('[data-test-id="RootAPP"]')).toHaveLength(1);
+describe('[Components] - <Root />', () => {
+  it('should render Root without breaking', () => {
+    const { getByTestId } = render(<Root />);
+
+    expect(getByTestId('msh--root-app')).toBeInTheDocument();
   });
 });
-

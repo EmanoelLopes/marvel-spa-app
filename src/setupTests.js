@@ -1,21 +1,18 @@
-const configure = require('enzyme').configure;
-const Adapter = require('enzyme-adapter-react-16');
+import React from 'react';
+import '@testing-library/jest-dom';
+import 'jest-styled-components';
+import { render } from '@testing-library/react';
 
-require('jest-enzyme');
-require('jest-styled-components');
+import { Root } from 'components';
 
-const rootDir = process.cwd();
+const WrapperProvider = ({ children }) => (
+  <Root>{children}</Root>
+);
 
-configure({ adapter: new Adapter() });
+const customRender = (ui, options) => render(ui, { wrapper: WrapperProvider, ...options });
 
-module.exports = {
-  verbose: true,
-  rootDir,
-  coverageDirectory: 'coverage',
-  collectCoverageFrom: [
-    'src/**/*.{js,jsx}',
-  ],
-  coveragePathIgnorePatterns: [
-    'node_modules/**',
-  ],
+export * from '@testing-library/react';
+
+export {
+  customRender as render,
 };

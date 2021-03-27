@@ -1,19 +1,16 @@
+/* eslint-disable */
 import React from 'react';
-import { element } from 'prop-types';
+import PropTypes from 'prop-types';
 import * as S from './styles';
 
-const Main = ({ children }) => (
-  <S.MainWrapper>
-    {children}
-  </S.MainWrapper>
-);
+export function Main({ children }) {
+  return <S.MainWrapper data-testid="msh--main">{children}</S.MainWrapper>;
+}
 
 Main.defaultProps = {
-  children: '<div />',
+  chidren: <div />,
 };
 
 Main.propTypes = {
-  chidren: element,
+  chidren: PropTypes.node,
 };
-
-export default Main;
