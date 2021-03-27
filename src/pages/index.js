@@ -1,5 +1,5 @@
-import Home from './Home';
-import Hero from './Hero';
-import NotMatch from './NotMatch';
+import { Home } from 'pages/Home';
+import { Hero } from 'pages/Hero';
+import { NotMatch } from 'pages/NotMatch';
 
 export { Home, Hero, NotMatch };

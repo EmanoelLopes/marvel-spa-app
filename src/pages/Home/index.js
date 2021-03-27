@@ -1,16 +1,18 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import Header from 'components/Header';
-import SearchBar from 'components/SearchBar';
-import Filters from 'components/Filters';
-import HeroesList from 'components/HeroesList';
-import Main from 'components/Main';
-import Footer from 'components/Footer';
-import Loader from 'components/Loader';
-import Alert from 'components/Alert';
-import { getHeroes } from 'utils/request';
+import {
+  Header,
+  SearchBar,
+  Filters,
+  HeroesList,
+  Main,
+  Footer,
+  Loader,
+  Alert,
+} from 'components';
+import { getHeroes } from 'services';
 import * as S from 'styles/styled';
 
-const Home = () => {
+export function Home() {
   const [heroes, setHeroes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState({
@@ -22,27 +24,24 @@ const Home = () => {
   const [showOnlyFavorites, setShowOnlyFavorites] = useState(false);
   const [, setIsSorted] = useState(false);
 
-  const getHeroesList = useCallback(
-    () => {
-      setIsLoading(true);
+  const getHeroesList = useCallback(() => {
+    setIsLoading(true);
 
-      return getHeroes()
-        .then(({ data }) => {
-          const { results } = data.data;
-          setHeroes(results);
-          setIsLoading(false);
-        })
-        .catch(({ response }) => {
-          setError({
-            hasError: true,
-            statusCode: response?.status,
-            message: response?.data.message,
-          });
-          setIsLoading(false);
+    return getHeroes()
+      .then(({ data }) => {
+        const { results } = data.data;
+        setHeroes(results);
+        setIsLoading(false);
+      })
+      .catch(({ response }) => {
+        setError({
+          hasError: true,
+          statusCode: response?.status,
+          message: response?.data.message,
         });
-      },
-    [],
-  );
+        setIsLoading(false);
+      });
+  }, []);
 
   const toggleFavorites = () => {
     setShowOnlyFavorites((showOnlyFavorites) => !showOnlyFavorites);
@@ -53,31 +52,29 @@ const Home = () => {
     setHeroes(heroes.reverse());
   };
 
-  const handleClick = () => {
-    console.log('click!');
+  const handleClick = (e) => {
+    setSearchValue(e.target.value);
   };
 
   const handleChange = (e) => {
     setSearchValue(e.target.value);
   };
 
-  const handleKeyDown = (e) => {
-    console.log(e.which === 13);
-  };
-
   useEffect(() => {
-    getHeroesList();
+    let unmounted = false;
+
+    if (!unmounted) {
+      getHeroesList();
+    }
+
+    return () => (unmounted = true);
   }, [getHeroesList]);
 
   return (
-    <S.Wrapper>
+    <S.Wrapper data-testid="msh--page-home">
       <S.Container>
         <Header />
-        <SearchBar
-          onChange={handleChange}
-          onClick={handleClick}
-          onKeyDown={handleKeyDown}
-        />
+        <SearchBar onChange={handleChange} onClick={handleClick} />
         <Filters
           amount={heroes.length}
           onClick={toggleSorted}
@@ -103,6 +100,4 @@ const Home = () => {
       <Footer />
     </S.Wrapper>
   );
-};
-
-export default Home;
+}

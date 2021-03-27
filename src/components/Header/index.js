@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import * as S from './styles';
 import Logo from 'assets/images/marvel-logo.svg';
 
-const Header = () => {
+export function Header() {
   return (
-    <S.HeaderHome>
+    <S.HeaderHome data-testid="msh--header">
       <Link to="/">
         <img src={Logo} alt="Marvel" />
       </Link>
@@ -16,6 +16,6 @@ const Header = () => {
       </p>
     </S.HeaderHome>
   );
-};
+}
 
 export default Header;

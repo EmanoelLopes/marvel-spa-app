@@ -1,13 +1,12 @@
 import React, { Fragment, useState } from 'react';
 import { array, string, bool } from 'prop-types';
 import { Link } from 'react-router-dom';
-import Alert from 'components/Alert';
-import { ReactComponent as HeartEmpty } from 'assets/icons/heart-empty.svg';
-import { ReactComponent as HeartFull } from 'assets/icons/heart-full.svg';
+import { Alert } from 'components';
+import { HeartEmpty, HeartFull } from 'components/Icons';
 import { useLocalStorage } from 'hooks';
 import * as S from './styles';
 
-const HeroesList = ({ heroes, value, onlyFavorites }) => {
+export function HeroesList({ heroes, value, onlyFavorites }) {
   const [storedValue, setStoreValue] = useLocalStorage([], 'favorites');
   const [favorites, setFavorites] = useState(storedValue || []);
   const filterdHeroes = (hero) => hero.name.toLowerCase().includes(value.toLowerCase());
@@ -26,7 +25,7 @@ const HeroesList = ({ heroes, value, onlyFavorites }) => {
       if (newFavorites.length <= 5) {
         setFavorites(newFavorites);
         setStoreValue(newFavorites);
-      };
+      }
       return false;
     };
 
@@ -36,12 +35,9 @@ const HeroesList = ({ heroes, value, onlyFavorites }) => {
   return (
     <Fragment>
       {onlyFavorites && !storedValue.length && (
-        <Alert
-          message={'Você não tem nenhum favorito selecionado!'}
-          messageId="ShowOnlyFavoritesAlert"
-        />
+        <Alert message={'Você não tem nenhum favorito selecionado!'} id="1" />
       )}
-      <S.List data-only-favorites={onlyFavorites} data-test-id="HeroesList">
+      <S.List data-only-favorites={onlyFavorites} data-testid="msh--heroes-list">
         {heroes.filter(filterdHeroes).map((hero) => (
           <S.ListItem key={hero.id} data-is-favorite={storedValue.includes(hero.id)}>
             <Link key={hero.id} to={`/hero/${hero.id}`}>
@@ -56,7 +52,7 @@ const HeroesList = ({ heroes, value, onlyFavorites }) => {
                 onClick={() => {
                   toggleToFavorites(hero.id);
                 }}
-                data-test-id={`hero-${hero.id}`}
+                data-testid={`msh--hero-${hero.id}`}
               >
                 {storedValue.includes(hero.id) ? <HeartFull /> : <HeartEmpty />}
               </S.ToggleFavorite>
@@ -66,7 +62,7 @@ const HeroesList = ({ heroes, value, onlyFavorites }) => {
       </S.List>
     </Fragment>
   );
-};
+}
 
 HeroesList.defaultProps = {
   heroes: [],
@@ -79,5 +75,3 @@ HeroesList.propTypes = {
   value: string,
   onlyFavorites: bool,
 };
-
-export default HeroesList;

@@ -1,0 +1,9 @@
+
+/node_modules
+/cypress
+/coverage
+/build
+/src/reportWebVitals.js
+/src/config
+src/setupTests.js
+/*.js

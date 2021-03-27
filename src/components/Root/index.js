@@ -2,13 +2,11 @@ import React from 'react';
 import Routes from 'routes';
 import { GlobalStyles } from 'styles';
 
-function Root() {
+export function Root() {
   return (
-    <div className="ROOT" data-test-id="RootAPP">
+    <div className="root-app" data-testid="msh--root-app">
       <GlobalStyles />
       <Routes />
     </div>
   );
 }
-
-export default Root;
