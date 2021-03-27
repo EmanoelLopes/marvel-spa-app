@@ -4,14 +4,14 @@ import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { HeroContainer } from 'components';
 import { Hero } from 'Pages';
-import mockData from './mockData.json';
 
 describe('[Component] - <Hero />', () => {
+  const history = createMemoryHistory();
+  const route = '/hero/1';
+
   it('should render Hero', () => {
-    const history = createMemoryHistory();
-    const route = '/hero/1';
     const props = {
-      data: { ...mockData },
+      data: {},
     };
 
     history.push(route);
@@ -19,7 +19,7 @@ describe('[Component] - <Hero />', () => {
     render(
       <Router history={history}>
         <Hero>
-          <HeroContainer {...props} />
+          <HeroContainer {...props.data} />
         </Hero>
       </Router>
     );

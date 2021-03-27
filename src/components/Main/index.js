@@ -7,6 +7,10 @@ export function Main({ children }) {
   return <S.MainWrapper data-testid="msh--main">{children}</S.MainWrapper>;
 }
 
+Main.defaultProps = {
+  chidren: <div />,
+};
+
 Main.propTypes = {
-  chidren: PropTypes.node.isRequired,
+  chidren: PropTypes.node,
 };

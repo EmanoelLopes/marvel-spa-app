@@ -13,7 +13,12 @@ export function HeroContainer({ data }) {
           <h2>Últimos lançamentos</h2>
           <S.List>
             {data.comics?.items.map(
-              (item, index) => index <= 9 && <li key={item.resourceURI}>{item.name}</li>
+              (item, index) =>
+                index <= 9 && (
+                  <li data-testid={`${item.name}--${index}`} key={item.resourceURI}>
+                    {item.name}
+                  </li>
+                )
             )}
           </S.List>
           <Link to="/">Voltar para a página inicial</Link>

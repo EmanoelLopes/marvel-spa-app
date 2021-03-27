@@ -16,7 +16,7 @@ export function Filters({ amount, onClick, selectFavorites, onlyFavorites }) {
         <S.SelectFavorites
           data-only-favorites={onlyFavorites}
           onClick={selectFavorites}
-          data-test-id="ShowOnlyFavorites"
+          data-testid="msh--show-only-favorites"
         >
           {onlyFavorites ? (
             <HeartFull data-testid="msh--icon-heart-full" />
