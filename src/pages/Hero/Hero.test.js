@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import { Hero } from 'Pages';
+import { Hero } from 'pages';
 
 describe('[Pages] - <Hero />', () => {
   it('should render Hero', () => {

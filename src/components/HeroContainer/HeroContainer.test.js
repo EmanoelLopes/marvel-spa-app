@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { HeroContainer } from 'components';
-import { Hero } from 'Pages';
+import { Hero } from 'pages';
 
 describe('[Component] - <Hero />', () => {
   const history = createMemoryHistory();

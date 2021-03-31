@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import { Home } from 'Pages';
+import { Home } from 'pages';
 
 describe('[Pages] - <Home />', () => {
   it('should render Home', () => {
