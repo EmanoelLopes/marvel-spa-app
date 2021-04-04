@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { themes } from 'styles';
 
 export const PaginationWrapper = styled.section`
   align-items: center;
@@ -18,4 +19,21 @@ export const PaginationList = styled.ul`
 
 export const PaginationItem = styled.li`
   margin: 0 8px;
+`;
+
+export const PaginationButton = styled.button`
+  align-items: center;
+  border: 2px solid ${themes.main.colors.red};
+  border-radius: 4px;
+  color: ${themes.main.colors.red};
+  cursor: pointer;
+  display: flex;
+  font-weight: 600;
+  height: 32px;
+  justify-content: center;
+  width: 32px;
+
+  &:hover {
+    background-color: ${themes.main.colors.white};
+  }
 `;

@@ -57,6 +57,18 @@ export function Home() {
     [setPagination]
   );
 
+  const handlePagination = useCallback(() => {
+    setParams((previousState) => {
+      return {
+        ...previousState,
+        offset:
+          pagination.currentPage === 1
+            ? null
+            : (pagination.currentPage - 1) * pagination.pageLimit,
+      };
+    });
+  }, [setParams, pagination.currentPage, pagination.pageLimit]);
+
   const toggleFavorites = () => {
     setShowOnlyFavorites((showOnlyFavorites) => !showOnlyFavorites);
   };
@@ -111,18 +123,8 @@ export function Home() {
             />
           )}
         </Main>
-        {`${pagination.currentPage} ---- ${pagination.totalPages}`}
-        <Pagination
-          onPageChange={() =>
-            setParams((previousState) => {
-              console.log(pagination);
-              return {
-                ...previousState,
-                offset: (pagination.currentPage - 1) * pagination.pageLimit,
-              };
-            })
-          }
-        />
+        {`${pagination.currentPage} / ${pagination.totalPages}`}
+        <Pagination onPageChange={handlePagination} />
       </S.Container>
       <Footer />
     </S.Wrapper>

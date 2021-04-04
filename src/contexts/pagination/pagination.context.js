@@ -2,7 +2,7 @@ import React, { useState, createContext } from 'react';
 import { node } from 'prop-types';
 
 const initialState = {
-  totalPages: null,
+  totalPages: 1,
   pageLimit: 20,
   currentPage: 1,
 };
