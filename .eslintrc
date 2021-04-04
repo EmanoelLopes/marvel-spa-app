@@ -7,8 +7,7 @@
   },
   "extends": [
     "eslint:recommended",
-    "plugin:react/recommended",
-    "prettier"
+    "plugin:react/recommended"
   ],
   "settings": {
     "react": {
@@ -28,7 +27,6 @@
     "prettier"
   ],
   "rules": {
-    "prettier/prettier": "error",
     "react/react-in-jsx-scope": "off", // obriga importação de React from "react" em JSX; Dispensável com React 17+
     // regras adicionais
     "jsx-a11y/href-no-hash": "off", // permite hrefs com hash

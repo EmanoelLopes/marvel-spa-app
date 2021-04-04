@@ -8,7 +8,7 @@ import * as S from './styles';
 
 export function HeroesList({ heroes, value, onlyFavorites }) {
   const [storedValue, setStoreValue] = useLocalStorage([], 'favorites');
-  const [favorites, setFavorites] = useState(storedValue || []);
+  const [favorites, setFavorites] = useState(storedValue);
   const filterdHeroes = (hero) => hero.name.toLowerCase().includes(value.toLowerCase());
 
   const toggleToFavorites = (id) => {
@@ -42,6 +42,7 @@ export function HeroesList({ heroes, value, onlyFavorites }) {
           <S.ListItem key={hero.id} data-is-favorite={storedValue.includes(hero.id)}>
             <Link key={hero.id} to={`/hero/${hero.id}`}>
               <S.ListItemImage
+                data-testid={`msh--hero-${hero.id}-bg`}
                 bg={`${hero.thumbnail?.path}.${hero.thumbnail?.extension}`}
                 title={hero.name}
               />

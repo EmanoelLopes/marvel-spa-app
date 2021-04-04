@@ -23,7 +23,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jest-environment-jsdom-sixteen --verbose",
     "test:unit": "yarn test --watchAll=false --passWithNoTests",
-    "coverage": "react-scripts test --env=jest-environment-jsdom-sixteen --coverage --watchAll=false --passWithNoTests",
+    "test:coverage": "react-scripts test --env=jest-environment-jsdom-sixteen --coverage --watchAll=false --passWithNoTests",
     "test:e2e": "cypress open",
     "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
     "eject": "react-scripts eject",
