@@ -7,7 +7,7 @@ const initialState = {
   currentPage: 1,
 };
 
-const PaginationContext = createContext(initialState);
+const PaginationContext = createContext(null);
 
 const PaginationContextProvider = ({ children }) => {
   const [pagination, setPagination] = useState(initialState);

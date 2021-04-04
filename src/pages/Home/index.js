@@ -22,7 +22,7 @@ export function Home() {
   const [, setIsSorted] = useState(false);
   const [pagination, setPagination] = useContext(PaginationContext);
   const [params, setParams] = useState({
-    events: 315,
+    events: 116,
     offset: null,
   });
   const [error, setError] = useState({
@@ -30,11 +30,6 @@ export function Home() {
     statusCode: 0,
     message: 'Eita nóis! Aconteceu uma treta aqui :/!',
   });
-
-  const getCurrentPage = () =>
-    pagination.currentPage === 1
-      ? null
-      : (pagination.currentPage - 1) * pagination.pageLimit;
 
   const getHeroesList = useCallback(
     (queryParams) => {
@@ -119,10 +114,13 @@ export function Home() {
         {`${pagination.currentPage} ---- ${pagination.totalPages}`}
         <Pagination
           onPageChange={() =>
-            setParams((previousValue) => ({
-              ...previousValue,
-              offset: getCurrentPage(),
-            }))
+            setParams((previousState) => {
+              console.log(pagination);
+              return {
+                ...previousState,
+                offset: (pagination.currentPage - 1) * pagination.pageLimit,
+              };
+            })
           }
         />
       </S.Container>
