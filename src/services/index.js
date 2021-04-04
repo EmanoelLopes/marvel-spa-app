@@ -9,9 +9,8 @@ const apiRoutes = {
   characters: 'characters',
 };
 
-const params = {
+const defaultParams = {
   apikey: REACT_APP_MARVEL_API_KEY,
-  events: 315, // Avengers: Endgame
 };
 
 const headers = {
@@ -24,8 +23,18 @@ const instance = axios.create({
   headers,
 });
 
-const getHeroes = async () => await instance.get(apiRoutes.characters, { params });
+const getHeroes = async (params) =>
+  await instance.get(apiRoutes.characters, {
+    params: {
+      ...defaultParams,
+      ...params,
+    },
+  });
 const getHero = async (id) =>
-  await instance.get(`${apiRoutes.characters}/${id}`, { params });
+  await instance.get(`${apiRoutes.characters}/${id}`, {
+    params: {
+      ...defaultParams,
+    },
+  });
 
 export { getHero, getHeroes };

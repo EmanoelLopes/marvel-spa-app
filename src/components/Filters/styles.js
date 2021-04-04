@@ -22,6 +22,19 @@ export const FiltersSection = styled.section`
 export const ToggleSorter = styled.div`
   align-items: center;
   display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+
+  ${media.desktop`
+    flex-direction: row;
+    justify-content: space-between;
+  `}
+`;
+
+export const SorterWrapper = styled.div`
+  align-items: center;
+  color: ${lighten(0.1, themes.main.colors.red)};
+  display: flex;
   justify-content: space-between;
 
   > span {
@@ -29,10 +42,6 @@ export const ToggleSorter = styled.div`
     color: ${lighten(0.1, themes.main.colors.red)};
     display: flex;
     margin: 0 8px;
-
-    > svg {
-      margin: 0 8px;
-    }
   }
 `;
 

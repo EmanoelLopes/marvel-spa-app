@@ -5,23 +5,23 @@ export const List = styled.ul`
   display: grid;
   grid-gap: 2em;
   grid-template-columns: repeat(1, 1fr);
-  grid-template-rows: repeat(20, 300px);
+  grid-template-rows: repeat(20, auto);
   margin: 0;
   padding: 24px 0 48px;
 
   ${media.tablet`
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows:    repeat(10, 300px);
+    grid-template-rows:    repeat(10, auto);
   `}
 
   ${media.desktop`
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows:    repeat(5, 300px);
+    grid-template-rows:    repeat(5, auto);
   `}
 
   ${media.largeDesktop`
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows:    repeat(4, 300px);
+    grid-template-rows:    repeat(4, auto);
   `}
 
   > a {
@@ -29,7 +29,7 @@ export const List = styled.ul`
   }
 
   &[data-only-favorites='true'] {
-    grid-template-rows: repeat(1, 300px);
+    grid-template-rows: repeat(1, auto);
 
     > li[data-is-favorite='false'] {
       display: none;

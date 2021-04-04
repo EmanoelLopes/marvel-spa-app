@@ -6,6 +6,7 @@ import { HeroContainer } from 'components/HeroContainer';
 import { HeroesList } from 'components/HeroesList';
 import { Loader } from 'components/Loader';
 import { Main } from 'components/Main';
+import { Pagination } from 'components/Pagination';
 import { Root } from 'components/Root';
 import { SearchBar } from 'components/SearchBar';
 import { Toggle } from 'components/Toggle';
@@ -19,6 +20,7 @@ export {
   HeroesList,
   Loader,
   Main,
+  Pagination,
   Root,
   SearchBar,
   Toggle,

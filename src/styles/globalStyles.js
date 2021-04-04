@@ -13,6 +13,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Work Sans', sans-serif;
     height: 100%;
     width: 100%;
+    overflow-x: hidden;
   }
 
   body {
