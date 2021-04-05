@@ -19,9 +19,6 @@ export function Pagination({ onPageChange }) {
     <S.PaginationWrapper>
       <S.PaginationList>
         <S.PaginationItem>
-          {/* <button onClick={() => handlePagination(pagination.currentPage - 1)}>
-            Previous
-          </button> */}
         </S.PaginationItem>
         {Array(pagination.totalPages)
           .fill()
@@ -33,9 +30,6 @@ export function Pagination({ onPageChange }) {
             </S.PaginationItem>
           ))}
         <S.PaginationItem>
-          {/* <button onClick={() => handlePagination(pagination.currentPage + 1)}>
-            Next
-          </button> */}
         </S.PaginationItem>
       </S.PaginationList>
     </S.PaginationWrapper>
