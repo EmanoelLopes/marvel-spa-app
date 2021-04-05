@@ -43,7 +43,7 @@ export function HeroesList({ heroes, value, onlyFavorites }) {
             <Link key={hero.id} to={`/hero/${hero.id}`}>
               <S.ListItemImage
                 data-testid={`msh--hero-${hero.id}-bg`}
-                bg={`${hero.thumbnail?.path}.${hero.thumbnail?.extension}`}
+                bg={`${hero.thumbnail?.path?.replace('http', 'https')}.${hero.thumbnail?.extension}`}
                 title={hero.name}
               />
             </Link>

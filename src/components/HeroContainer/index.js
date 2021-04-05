@@ -26,7 +26,7 @@ export function HeroContainer({ data }) {
         <article>
           {data.thumbnail && (
             <S.HeroImage
-              src={`${data.thumbnail?.path}.${data.thumbnail?.extension}`}
+              src={`${data.thumbnail?.path?.replace('http', 'https')}.${data.thumbnail?.extension}`}
               alt={data.name}
             />
           )}
