@@ -10,6 +10,7 @@ export function Pagination({ onPageChange }) {
     setPagination(() => ({
       ...pagination,
       currentPage: page + 1,
+      offset: (page + 1) === 1 ? null : (page) * pagination.pageLimit,
     }));
     onPageChange(page);
   };

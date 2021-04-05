@@ -5,9 +5,13 @@ const initialState = {
   totalPages: 1,
   pageLimit: 20,
   currentPage: 1,
+  offset: null,
 };
 
-const PaginationContext = createContext(null);
+
+const isDevMode = process.env.NODE_ENV === 'test';
+
+const PaginationContext = createContext(!isDevMode ? null : [initialState, () => {}]);
 
 const PaginationContextProvider = ({ children }) => {
   const [pagination, setPagination] = useState(initialState);

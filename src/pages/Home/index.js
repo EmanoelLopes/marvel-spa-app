@@ -31,6 +31,26 @@ export function Home() {
     message: 'Eita nóis! Aconteceu uma treta aqui :/!',
   });
 
+  const updatePaginationState = () => {
+    let previous;
+
+    setPagination((previousValue) => {
+      previous = previousValue;
+      return {
+        ...previousValue,
+      };
+    });
+    setParams((previousValue) => {
+      return { ...previousValue, offset: previous?.offset };
+    });
+  };
+
+  /* eslint-disable */
+  useEffect(() => {
+    updatePaginationState();
+  }, []);
+  /* eslint-enable */
+
   const getHeroesList = useCallback(
     (queryParams) => {
       setIsLoading(true);
@@ -57,17 +77,15 @@ export function Home() {
     [setPagination]
   );
 
+  /* eslint-disable */
   const handlePagination = useCallback(() => {
-    setParams((previousState) => {
-      return {
-        ...previousState,
-        offset:
-          pagination.currentPage === 1
-            ? null
-            : (pagination.currentPage - 1) * pagination.pageLimit,
-      };
+    updatePaginationState();
+
+    setParams((previousValue) => {
+      return { ...previousValue, offset: previousValue?.offset };
     });
-  }, [setParams, pagination.currentPage, pagination.pageLimit]);
+  }, [setParams]);
+  /* eslint-enable */
 
   const toggleFavorites = () => {
     setShowOnlyFavorites((showOnlyFavorites) => !showOnlyFavorites);
@@ -123,7 +141,7 @@ export function Home() {
             />
           )}
         </Main>
-        {`${pagination.currentPage} / ${pagination.totalPages}`}
+        {`${pagination?.currentPage} / ${pagination?.totalPages}`}
         <Pagination onPageChange={handlePagination} />
       </S.Container>
       <Footer />
