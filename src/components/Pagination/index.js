@@ -24,7 +24,10 @@ export function Pagination({ onPageChange }) {
           .fill()
           .map((_, index) => (
             <S.PaginationItem key={index}>
-              <S.PaginationButton onClick={() => handlePagination(index)}>
+              <S.PaginationButton
+                isActive={(index + 1) === pagination.currentPage}
+                onClick={() => handlePagination(index)}
+              >
                 {index + 1}
               </S.PaginationButton>
             </S.PaginationItem>

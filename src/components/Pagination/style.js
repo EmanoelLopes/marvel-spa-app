@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { themes } from 'styles';
 
 export const PaginationWrapper = styled.section`
@@ -32,6 +32,11 @@ export const PaginationButton = styled.button`
   height: 32px;
   justify-content: center;
   width: 32px;
+
+  ${({ isActive }) => isActive && css`
+    background-color: ${themes.main.colors.red};
+    color: ${themes.main.colors.white};
+  `}
 
   &:hover {
     background-color: ${themes.main.colors.white};
