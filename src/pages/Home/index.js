@@ -32,16 +32,16 @@ export function Home() {
   });
 
   const updatePaginationState = () => {
-    let previous;
+    let newValue;
 
     setPagination((previousValue) => {
-      previous = previousValue;
+      newValue = previousValue;
       return {
         ...previousValue,
       };
     });
     setParams((previousValue) => {
-      return { ...previousValue, offset: previous?.offset };
+      return { ...previousValue, offset: newValue?.offset };
     });
   };
 
