@@ -36,6 +36,11 @@ export const SorterWrapper = styled.div`
   color: ${lighten(0.1, themes.main.colors.red)};
   display: flex;
   justify-content: space-between;
+  margin: 16px 0;
+
+  ${media.desktop`
+    margin: 0 0;
+  `}
 
   > span {
     align-items: center;
