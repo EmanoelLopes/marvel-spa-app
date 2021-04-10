@@ -1,12 +1,12 @@
 import React from 'react';
 import * as S from './styles';
-import MarvelLoaderGif from 'assets/images/marvel-loader.gif';
+import MarvelLoaderVideo from 'assets/videos/marvel-loader.mp4';
 
 export function Loader() {
   return (
     <S.LoaderContainer data-testid="msh--loader">
       <p>Carregando...</p>
-      <img src={MarvelLoaderGif} alt="Marvel" />
+      <video src={MarvelLoaderVideo} autoPlay loop></video>
     </S.LoaderContainer>
   );
 }
