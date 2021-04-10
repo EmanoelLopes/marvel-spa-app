@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { themes } from 'styles';
+import { themes, media } from 'styles';
 
 export const PaginationWrapper = styled.section`
   align-items: center;
@@ -13,18 +13,30 @@ export const PaginationWrapper = styled.section`
 
 export const PaginationList = styled.ul`
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   list-style: none;
   margin: 0;
+  max-width: 80%;
+
+  ${media.tablet`
+    flex-wrap: nowrap;
+    max-width: 100%;
+  `}
 `;
 
 export const PaginationItem = styled.li`
-  margin: 0 8px;
+  margin: 8px;
+
+  ${media.tablet`
+    margin: 0 8px;
+  `}
 `;
 
 export const PaginationButton = styled.button`
   align-items: center;
-  border: 2px solid ${themes.main.colors.red};
   border-radius: 4px;
+  border: 2px solid ${themes.main.colors.red};
   color: ${themes.main.colors.red};
   display: flex;
   font-weight: 600;
@@ -49,8 +61,14 @@ export const PaginationButton = styled.button`
 
   &:disabled {
     background-color: ${themes.main.colors.lightGrey};
-    border: 2px solid ${themes.main.colors.lightGrey}; 
-    cursor: not-allowed;
+    border: 2px solid ${themes.main.colors.lightGrey};
+    cursor: initial;
+
+    ${({ isActive }) => isActive && css`
+      background-color: ${themes.main.colors.red};
+      border: 2px solid ${themes.main.colors.red};
+      color: ${themes.main.colors.white};
+    `}
 
     > svg {
       fill: ${themes.main.colors.white};

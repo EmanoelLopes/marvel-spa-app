@@ -1,15 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { func } from 'prop-types';
 import { PaginationContext } from 'contexts/pagination/pagination.context';
 import { ChevronLeft, ChevronRight } from 'components/Icons';
+import { range } from 'utils/helpers';
 import * as S from './style';
 
 export function Pagination({ onPageChange }) {
   const [pagination, setPagination] = useContext(PaginationContext);
   const isFirstPage = pagination?.currentPage === 1;
   const isLastPage = pagination?.currentPage === pagination?.totalPages;
+  const [pageRange] = useState({
+    from: 1,
+    to: (pagination?.totalPages <= 6)
+      ? pagination.totalPages
+      : 6
+  });
+  const [pagesToRender] = useState(range(pageRange.from, pageRange.to));
 
   const handlePagination = (page) => {
+    if (page + 1 === pagination?.currentPage) return false;
     setPagination(() => ({
       ...pagination,
       currentPage: page + 1,
@@ -49,11 +58,12 @@ export function Pagination({ onPageChange }) {
             <ChevronLeft />
           </S.PaginationButton>
         </S.PaginationItem>
-        {Array(pagination?.totalPages)
+        {pagesToRender
           .fill()
           .map((_, index) => (
             <S.PaginationItem key={index}>
               <S.PaginationButton
+                disabled={pagination?.currentPage === (index + 1)}
                 isActive={(index + 1) === pagination?.currentPage}
                 onClick={() => handlePagination(index)}
               >
