@@ -6,14 +6,14 @@ import * as S from './style';
 
 export function Pagination({ onPageChange }) {
   const [pagination, setPagination] = useContext(PaginationContext);
-  const isFirstPage = pagination.currentPage === 1;
-  const isLastPage = pagination.currentPage === pagination.totalPages;
+  const isFirstPage = pagination?.currentPage === 1;
+  const isLastPage = pagination?.currentPage === pagination?.totalPages;
 
   const handlePagination = (page) => {
     setPagination(() => ({
       ...pagination,
       currentPage: page + 1,
-      offset: (page + 1) === 1 ? null : (page) * pagination.pageLimit,
+      offset: (page + 1) === 1 ? null : (page) * pagination?.pageLimit,
     }));
     onPageChange(page);
   };
@@ -23,7 +23,7 @@ export function Pagination({ onPageChange }) {
     setPagination(() => ({
       ...pagination,
       currentPage: page - 1,
-      offset: (page - 1) <= 1 ? null : (page - 2) * pagination.pageLimit,
+      offset: (page - 1) <= 1 ? null : (page - 2) * pagination?.pageLimit,
     }));
     onPageChange(page);
   };
@@ -32,7 +32,7 @@ export function Pagination({ onPageChange }) {
     setPagination(() => ({
       ...pagination,
       currentPage: page + 1,
-      offset: (page) >= pagination.totalPages ? null : (page) * pagination.pageLimit,
+      offset: (page) >= pagination?.totalPages ? null : (page) * pagination?.pageLimit,
     }));
     onPageChange(page);
   };
@@ -44,17 +44,17 @@ export function Pagination({ onPageChange }) {
           <S.PaginationButton
             disabled={isFirstPage}
             onClick={() => {
-              handlePreviousPage(pagination.currentPage);
+              handlePreviousPage(pagination?.currentPage);
             }}>
             <ChevronLeft />
           </S.PaginationButton>
         </S.PaginationItem>
-        {Array(pagination.totalPages)
+        {Array(pagination?.totalPages)
           .fill()
           .map((_, index) => (
             <S.PaginationItem key={index}>
               <S.PaginationButton
-                isActive={(index + 1) === pagination.currentPage}
+                isActive={(index + 1) === pagination?.currentPage}
                 onClick={() => handlePagination(index)}
               >
                 {index + 1}
@@ -65,7 +65,7 @@ export function Pagination({ onPageChange }) {
           <S.PaginationButton
             disabled={isLastPage}
             onClick={() => {
-              handleNextPage(pagination.currentPage);
+              handleNextPage(pagination?.currentPage);
             }}
           >
             <ChevronRight />

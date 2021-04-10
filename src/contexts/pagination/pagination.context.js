@@ -8,10 +8,7 @@ const initialState = {
   offset: null,
 };
 
-
-const isTestEnv = process.env.NODE_ENV === 'test';
-
-const PaginationContext = createContext(!isTestEnv ? null : [initialState, () => {}]);
+const PaginationContext = createContext([]);
 
 const PaginationContextProvider = ({ children }) => {
   const [pagination, setPagination] = useState(initialState);
