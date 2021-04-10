@@ -9,7 +9,7 @@ export const List = styled.ul`
   margin: 0;
   padding: 24px 0 48px;
 
-  ${media.tablet`
+  ${media.phone`
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows:    repeat(10, auto);
   `}

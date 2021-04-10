@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { func } from 'prop-types';
 import { PaginationContext } from 'contexts/pagination/pagination.context';
 import { ChevronLeft, ChevronRight } from 'components/Icons';
@@ -9,13 +9,13 @@ export function Pagination({ onPageChange }) {
   const [pagination, setPagination] = useContext(PaginationContext);
   const isFirstPage = pagination?.currentPage === 1;
   const isLastPage = pagination?.currentPage === pagination?.totalPages;
-  const [pageRange] = useState({
+  const [pageRange, setPageRange] = useState({
     from: 1,
     to: (pagination?.totalPages <= 6)
       ? pagination.totalPages
-      : 6
+      : 6,
   });
-  const [pagesToRender] = useState(range(pageRange.from, pageRange.to));
+  const pagesToRender = range(pageRange.from, pageRange.to);
 
   const handlePagination = (page) => {
     if (page + 1 === pagination?.currentPage) return false;
@@ -36,6 +36,12 @@ export function Pagination({ onPageChange }) {
     }));
     onPageChange(page);
   };
+
+  useEffect(() => {
+    setPageRange((previousValue) => ({
+      ...previousValue,
+    }));
+  }, [setPagination]);
 
   const handleNextPage = (page) => {
     setPagination(() => ({
