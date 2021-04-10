@@ -26,12 +26,15 @@ export const PaginationButton = styled.button`
   border: 2px solid ${themes.main.colors.red};
   border-radius: 4px;
   color: ${themes.main.colors.red};
-  cursor: pointer;
   display: flex;
   font-weight: 600;
   height: 32px;
   justify-content: center;
   width: 32px;
+
+  > svg {
+    fill: ${themes.main.colors.red};
+  }
 
   ${({ isActive }) => isActive && css`
     background-color: ${themes.main.colors.red};
@@ -40,5 +43,17 @@ export const PaginationButton = styled.button`
 
   &:hover {
     background-color: ${themes.main.colors.white};
+    color: ${themes.main.colors.red};
+    cursor: pointer;
+  }
+
+  &:disabled {
+    background-color: ${themes.main.colors.lightGrey};
+    border: 2px solid ${themes.main.colors.lightGrey}; 
+    cursor: not-allowed;
+
+    > svg {
+      fill: ${themes.main.colors.white};
+    }
   }
 `;
