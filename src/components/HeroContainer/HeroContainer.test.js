@@ -19,7 +19,7 @@ describe('[Component] - <Hero />', () => {
     render(
       <Router history={history}>
         <Hero>
-          <HeroContainer {...props.data} />
+          <HeroContainer {...props} />
         </Hero>
       </Router>
     );
