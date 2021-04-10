@@ -47,7 +47,13 @@ export function Home() {
 
   /* eslint-disable */
   useEffect(() => {
-    updatePaginationState();
+    let unmounted = false;
+
+    if(!unmounted) {
+      updatePaginationState();
+    }
+
+    return () => unmounted = true;
   }, []);
   /* eslint-enable */
 

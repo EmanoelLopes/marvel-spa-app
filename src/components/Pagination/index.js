@@ -38,7 +38,7 @@ export function Pagination({ onPageChange }) {
   };
 
   return (
-    <S.PaginationWrapper>
+    <S.PaginationWrapper data-testid="msh--pagination">
       <S.PaginationList>
         <S.PaginationItem>
           <S.PaginationButton
