@@ -50,7 +50,7 @@ To run unit tests:
  To run e2e tests:
 ### `yarn test:e2e`
 
-Launches the [Cypress](https://docs.cypress.io/) test runner to run the End to End Tests.
+Launches the [Cypress](https://docs.cypress.io/) test runner to run the End to End Tests. Important: your application should be running on background to execute e2e tests properly.
 
 ## Production Build
 
