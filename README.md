@@ -25,6 +25,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 This application uses enviroment variables as the [Marvel API](https://developer.marvel.com/) apikey, so you need to include a `.env` file with the following `.env.sample` file:
 ```
+PORT=5001
 SKIP_PREFLIGHT_CHECK=true
 REACT_APP_MARVEL_SERVICE_ENDPOINT=https://gateway.marvel.com/
 REACT_APP_MARVEL_API_KEY={YOUR_API_PUBLIC_KEY}
