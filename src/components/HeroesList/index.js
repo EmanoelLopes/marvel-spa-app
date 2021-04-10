@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Alert } from 'components';
 import { HeartEmpty, HeartFull } from 'components/Icons';
 import { useLocalStorage } from 'hooks';
+import { httpsTransform } from 'utils/helpers';
 import * as S from './styles';
 
 export function HeroesList({ heroes, value, onlyFavorites }) {
@@ -43,7 +44,7 @@ export function HeroesList({ heroes, value, onlyFavorites }) {
             <Link key={hero.id} to={`/hero/${hero.id}`}>
               <S.ListItemImage
                 data-testid={`msh--hero-${hero.id}-bg`}
-                bg={`${hero.thumbnail?.path?.replace('http', 'https')}.${hero.thumbnail?.extension}`}
+                bg={`${httpsTransform(hero.thumbnail?.path)}.${hero.thumbnail?.extension}`}
                 title={hero.name}
               />
             </Link>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { object } from 'prop-types';
+import { httpsTransform } from 'utils/helpers';
 import * as S from './styles';
 
 export function HeroContainer({ data }) {
@@ -26,7 +27,7 @@ export function HeroContainer({ data }) {
         <article>
           {data.thumbnail && (
             <S.HeroImage
-              src={`${data.thumbnail?.path?.replace('http', 'https')}.${data.thumbnail?.extension}`}
+              src={`${httpsTransform(data.thumbnail?.path)}.${data.thumbnail?.extension}`}
               alt={data.name}
             />
           )}

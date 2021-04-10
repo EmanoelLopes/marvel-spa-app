@@ -1,3 +1,5 @@
+const httpsTransform = (str) => str.replace('http', 'https');
+
 const range = (from, to, step = 1) => {
   let i = from;
   const range = [];
@@ -10,4 +12,4 @@ const range = (from, to, step = 1) => {
   return range;
 };
 
-export { range };
+export { range, httpsTransform };
