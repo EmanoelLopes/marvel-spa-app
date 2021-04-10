@@ -31,14 +31,17 @@ REACT_APP_MARVEL_SERVICE_ENDPOINT=https://gateway.marvel.com/
 REACT_APP_MARVEL_API_KEY={YOUR_API_PUBLIC_KEY}
 ```
 
-!!! DOT NOT COMMIT YOUR `.env` files
+You can simply copy the contents of the `.env.sample` to a new `.env` file.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### !!! ATENTION: NEVER COMMIT YOUR `.env` FILES !!!
+
+
+This application is provided with hot reload in any code edition and linters to help maitain the pattern.
 
 ## Tests
 
-This application is provided with unit tests and end-to-end tests. 
+This application is also provided with unit tests and end-to-end tests.
+
 To run unit tests:
 
 ### `yarn test:unit`
