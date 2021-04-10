@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 import { func } from 'prop-types';
 import { PaginationContext } from 'contexts/pagination/pagination.context';
 import { ChevronLeft, ChevronRight } from 'components/Icons';
@@ -6,16 +6,18 @@ import { range } from 'utils/helpers';
 import * as S from './style';
 
 export function Pagination({ onPageChange }) {
+  const rangeStart = 1;
+  const rangeLimit = 6;
   const [pagination, setPagination] = useContext(PaginationContext);
   const isFirstPage = pagination?.currentPage === 1;
   const isLastPage = pagination?.currentPage === pagination?.totalPages;
   const [pageRange, setPageRange] = useState({
-    from: 1,
-    to: (pagination?.totalPages <= 6)
+    from: rangeStart,
+    to: (pagination?.totalPages <= rangeLimit)
       ? pagination.totalPages
-      : 6,
+      : rangeLimit,
   });
-  const pagesToRender = range(pageRange.from, pageRange.to);
+  const [pagesToRender, setPagesToRender] = useState([]);
 
   const handlePagination = (page) => {
     if (page + 1 === pagination?.currentPage) return false;
@@ -23,6 +25,10 @@ export function Pagination({ onPageChange }) {
       ...pagination,
       currentPage: page + 1,
       offset: (page + 1) === 1 ? null : (page) * pagination?.pageLimit,
+    }));
+    setPageRange(() => ({
+      from: page + rangeStart,
+      to: page + rangeLimit,
     }));
     onPageChange(page);
   };
@@ -34,14 +40,13 @@ export function Pagination({ onPageChange }) {
       currentPage: page - 1,
       offset: (page - 1) <= 1 ? null : (page - 2) * pagination?.pageLimit,
     }));
+    // @TODO: fix pageRange on handlePreviousPage
+    setPageRange((previousState) => ({
+      from: previousState.from,
+      to: previousState.to,
+    }));
     onPageChange(page);
   };
-
-  useEffect(() => {
-    setPageRange((previousValue) => ({
-      ...previousValue,
-    }));
-  }, [setPagination]);
 
   const handleNextPage = (page) => {
     setPagination(() => ({
@@ -49,8 +54,40 @@ export function Pagination({ onPageChange }) {
       currentPage: page + 1,
       offset: (page) >= pagination?.totalPages ? null : (page) * pagination?.pageLimit,
     }));
+    // @TODO: fix pageRange on handleNextPage
+    setPageRange((previousState) => ({
+      from: previousState.from,
+      to: previousState.to,
+    }));
     onPageChange(page);
   };
+
+  const updatePageRange = useCallback(() => {
+    let newState;
+
+    setPageRange((previousState) => {
+      newState = previousState;
+      return {
+        from: newState.from,
+        to: newState.to,
+      };
+    });
+  }, []);
+
+  const getPagesToRender = useCallback(() => {
+    setPagesToRender(range(pageRange.from, pageRange.to));
+  }, [pageRange.from, pageRange.to]);
+
+  useEffect(() => {
+    let unmounted = false;
+
+    if (!unmounted) {
+      updatePageRange();
+      getPagesToRender();
+    }
+
+    return () => unmounted = true;
+  }, [updatePageRange, getPagesToRender]);
 
   return (
     <S.PaginationWrapper data-testid="msh--pagination">
@@ -65,7 +102,7 @@ export function Pagination({ onPageChange }) {
           </S.PaginationButton>
         </S.PaginationItem>
         {pagesToRender
-          .fill()
+          .fill(null)
           .map((_, index) => (
             <S.PaginationItem key={index}>
               <S.PaginationButton
