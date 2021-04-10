@@ -67,8 +67,7 @@
       "!<rootDir>/src/reportWebVitals.js",
       "!<rootDir>/src/index.js",
       "!<rootDir>/src/components/index.js",
-      "!<rootDir>/src/components/Icons/index.js",
-      "!<rootDir>/src/components/Hooks/index.js",
+      "!<rootDir>/src/pages/**/*.js",
       "!<rootDir>/src/config/index.js"
     ],
     "coverageThreshold": {
