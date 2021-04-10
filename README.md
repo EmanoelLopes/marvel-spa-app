@@ -37,8 +37,13 @@ You will also see any lint errors in the console.
 
 ## Tests
 
-This application is provided with end-to-end tests. Run:
- 
+This application is provided with unit tests and end-to-end tests. 
+To run unit tests:
+
+### `yarn test:unit`
+
+
+ To run e2e tests:
 ### `yarn test:e2e`
 
 Launches the [Cypress](https://docs.cypress.io/) test runner to run the End to End Tests.
