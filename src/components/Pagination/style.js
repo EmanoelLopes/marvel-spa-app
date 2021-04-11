@@ -17,7 +17,7 @@ export const PaginationList = styled.ul`
   justify-content: center;
   list-style: none;
   margin: 0;
-  max-width: 80%;
+  width: 100%;
 
   ${media.tablet`
     flex-wrap: nowrap;

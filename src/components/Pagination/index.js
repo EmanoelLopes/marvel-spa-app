@@ -1,7 +1,7 @@
-import React, { useState, useContext, useEffect, useCallback } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { func } from 'prop-types';
 import { PaginationContext } from 'contexts/pagination/pagination.context';
-import { ChevronLeft, ChevronRight } from 'components/Icons';
+import { ChevronLeft, ChevronRight, ChevronLeftDouble, ChevronRightDouble } from 'components/Icons';
 import { range } from 'utils/helpers';
 import * as S from './style';
 
@@ -17,14 +17,13 @@ export function Pagination({ onPageChange }) {
       ? pagination.totalPages
       : rangeLimit,
   });
-  const [pagesToRender, setPagesToRender] = useState([]);
 
   const handlePagination = (page) => {
     if (page + 1 === pagination?.currentPage) return false;
     setPagination(() => ({
       ...pagination,
-      currentPage: page + 1,
-      offset: (page + 1) === 1 ? null : (page) * pagination?.pageLimit,
+      currentPage: page,
+      offset: (page) === 1 ? null : (page - 1) * pagination?.pageLimit,
     }));
     setPageRange(() => ({
       from: page + rangeStart,
@@ -40,11 +39,6 @@ export function Pagination({ onPageChange }) {
       currentPage: page - 1,
       offset: (page - 1) <= 1 ? null : (page - 2) * pagination?.pageLimit,
     }));
-    // @TODO: fix pageRange on handlePreviousPage
-    setPageRange((previousState) => ({
-      from: previousState.from,
-      to: previousState.to,
-    }));
     onPageChange(page);
   };
 
@@ -54,44 +48,40 @@ export function Pagination({ onPageChange }) {
       currentPage: page + 1,
       offset: (page) >= pagination?.totalPages ? null : (page) * pagination?.pageLimit,
     }));
-    // @TODO: fix pageRange on handleNextPage
-    setPageRange((previousState) => ({
-      from: previousState.from,
-      to: previousState.to,
-    }));
     onPageChange(page);
   };
 
-  const updatePageRange = useCallback(() => {
-    let newState;
-
-    setPageRange((previousState) => {
-      newState = previousState;
-      return {
-        from: newState.from,
-        to: newState.to,
-      };
-    });
-  }, []);
-
-  const getPagesToRender = useCallback(() => {
-    setPagesToRender(range(pageRange.from, pageRange.to));
-  }, [pageRange.from, pageRange.to]);
+  const getPageRange = () => {
+    if (pagination?.totalPages <= rangeLimit) return range(rangeStart, rangeLimit);
+    return range(pageRange.from, pageRange.to <= pagination?.totalPages ? pageRange.to : pagination.totalPages);
+  };
 
   useEffect(() => {
     let unmounted = false;
 
-    if (!unmounted) {
-      updatePageRange();
-      getPagesToRender();
-    }
+    if(!unmounted) {
+      getPageRange();
 
-    return () => unmounted = true;
-  }, [updatePageRange, getPagesToRender]);
+      setPageRange(() => ({
+        from: pagination?.currentPage,
+        to: pagination?.currentPage + (rangeLimit - 1),
+      }));
+    }
+    return () => {
+      unmounted = true;
+    };
+  }, [pagination.currentPage]);
 
   return (
     <S.PaginationWrapper data-testid="msh--pagination">
       <S.PaginationList>
+        <S.PaginationItem>
+          <S.PaginationButton
+            disabled={isFirstPage}
+            onClick={() => handlePreviousPage(rangeStart + 1)}>
+            <ChevronLeftDouble />
+          </S.PaginationButton>
+        </S.PaginationItem>
         <S.PaginationItem>
           <S.PaginationButton
             disabled={isFirstPage}
@@ -101,27 +91,31 @@ export function Pagination({ onPageChange }) {
             <ChevronLeft />
           </S.PaginationButton>
         </S.PaginationItem>
-        {pagesToRender
-          .fill(null)
-          .map((_, index) => (
-            <S.PaginationItem key={index}>
+        {getPageRange()
+          .map((value) => (
+            <S.PaginationItem key={value}>
               <S.PaginationButton
-                disabled={pagination?.currentPage === (index + 1)}
-                isActive={(index + 1) === pagination?.currentPage}
-                onClick={() => handlePagination(index)}
+                disabled={pagination?.currentPage === (value)}
+                isActive={(value) === pagination?.currentPage}
+                onClick={() => handlePagination(value)}
               >
-                {index + 1}
+                {value}
               </S.PaginationButton>
             </S.PaginationItem>
           ))}
         <S.PaginationItem>
           <S.PaginationButton
             disabled={isLastPage}
-            onClick={() => {
-              handleNextPage(pagination?.currentPage);
-            }}
-          >
+            onClick={() => handleNextPage(pagination?.currentPage)}>
             <ChevronRight />
+          </S.PaginationButton>
+        </S.PaginationItem>
+        <S.PaginationItem>
+          <S.PaginationButton
+            disabled={isLastPage}
+            onClick={() => handleNextPage(pagination?.totalPages - 1)}
+          >
+            <ChevronRightDouble />
           </S.PaginationButton>
         </S.PaginationItem>
       </S.PaginationList>
