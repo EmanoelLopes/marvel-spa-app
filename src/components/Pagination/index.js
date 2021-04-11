@@ -10,12 +10,14 @@ export function Pagination({ onPageChange }) {
   const rangeLimit = 6;
   const [pagination, setPagination] = useContext(PaginationContext);
   const currentPage = pagination?.currentPage;
+  const totalPages = pagination?.totalPages;
+  const pageLimit = pagination?.pageLimit;
   const isFirstPage = currentPage === 1;
-  const isLastPage = currentPage === pagination?.totalPages;
+  const isLastPage = currentPage === totalPages;
   const [pageRange, setPageRange] = useState({
     from: rangeStart,
-    to: (pagination?.totalPages <= rangeLimit)
-      ? pagination.totalPages
+    to: (totalPages <= rangeLimit)
+      ? totalPages
       : rangeLimit,
   });
 
@@ -24,7 +26,7 @@ export function Pagination({ onPageChange }) {
     setPagination(() => ({
       ...pagination,
       currentPage: page,
-      offset: (page) === 1 ? null : (page - 1) * pagination?.pageLimit,
+      offset: (page) === 1 ? null : (page - 1) * pageLimit,
     }));
     setPageRange(() => ({
       from: page + rangeStart,
@@ -38,7 +40,7 @@ export function Pagination({ onPageChange }) {
     setPagination(() => ({
       ...pagination,
       currentPage: page - 1,
-      offset: (page - 1) <= 1 ? null : (page - 2) * pagination?.pageLimit,
+      offset: (page - 1) <= 1 ? null : (page - 2) * pageLimit,
     }));
     onPageChange(page);
   };
@@ -47,14 +49,14 @@ export function Pagination({ onPageChange }) {
     setPagination(() => ({
       ...pagination,
       currentPage: page + 1,
-      offset: (page) >= pagination?.totalPages ? null : (page) * pagination?.pageLimit,
+      offset: (page) >= totalPages ? null : (page) * pageLimit,
     }));
     onPageChange(page);
   };
 
   const getPageRange = () => {
-    if (pagination?.totalPages <= rangeLimit) return range(rangeStart, rangeLimit);
-    return range(pageRange.from, pageRange.to <= pagination?.totalPages ? pageRange.to : pagination?.totalPages);
+    if (totalPages <= rangeLimit) return range(rangeStart, rangeLimit);
+    return range(pageRange.from, pageRange.to <= totalPages ? pageRange.to : totalPages);
   };
 
   useEffect(() => {
@@ -105,14 +107,14 @@ export function Pagination({ onPageChange }) {
         <S.PaginationItem>
           <S.PaginationButton
             disabled={isLastPage}
-            onClick={() => handleNextPage(pagination?.currentPage)}>
+            onClick={() => handleNextPage(currentPage)}>
             <ChevronRight />
           </S.PaginationButton>
         </S.PaginationItem>
         <S.PaginationItem>
           <S.PaginationButton
             disabled={isLastPage}
-            onClick={() => handleNextPage(pagination?.totalPages - 1)}
+            onClick={() => handleNextPage(totalPages - 1)}
           >
             <ChevronRightDouble />
           </S.PaginationButton>
