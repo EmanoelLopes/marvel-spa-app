@@ -53,7 +53,7 @@ export function Pagination({ onPageChange }) {
 
   const getPageRange = () => {
     if (pagination?.totalPages <= rangeLimit) return range(rangeStart, rangeLimit);
-    return range(pageRange.from, pageRange.to <= pagination?.totalPages ? pageRange.to : pagination.totalPages);
+    return range(pageRange.from, pageRange.to <= pagination?.totalPages ? pageRange.to : pagination?.totalPages);
   };
 
   useEffect(() => {
@@ -70,7 +70,7 @@ export function Pagination({ onPageChange }) {
     return () => {
       unmounted = true;
     };
-  }, [pagination.currentPage]);
+  }, [pagination?.currentPage]);
 
   return (
     <S.PaginationWrapper data-testid="msh--pagination">
