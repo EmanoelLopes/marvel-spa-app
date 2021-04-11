@@ -78,17 +78,19 @@ export function Pagination({ onPageChange }) {
       <S.PaginationList>
         <S.PaginationItem>
           <S.PaginationButton
-            disabled={isFirstPage}
-            onClick={() => handlePreviousPage(rangeStart + 1)}>
+            data-testid="msh--pagination-button-regress"
+            disabled={currentPage < rangeLimit}
+            onClick={() => handlePagination(currentPage - (rangeLimit - 1))}
+          >
             <ChevronLeftDouble />
           </S.PaginationButton>
         </S.PaginationItem>
         <S.PaginationItem>
           <S.PaginationButton
+            data-testid="msh--pagination-button-previous-page"
             disabled={isFirstPage}
-            onClick={() => {
-              handlePreviousPage(currentPage);
-            }}>
+            onClick={() => handlePreviousPage(currentPage)}
+          >
             <ChevronLeft />
           </S.PaginationButton>
         </S.PaginationItem>
@@ -96,6 +98,7 @@ export function Pagination({ onPageChange }) {
           .map((value) => (
             <S.PaginationItem key={value}>
               <S.PaginationButton
+                data-testid={`msh--pagination-button-page-${currentPage}`}
                 disabled={currentPage === (value)}
                 isActive={(value) === currentPage}
                 onClick={() => handlePagination(value)}
@@ -106,15 +109,18 @@ export function Pagination({ onPageChange }) {
           ))}
         <S.PaginationItem>
           <S.PaginationButton
+            data-testid="msh--pagination-button-next-page"
             disabled={isLastPage}
-            onClick={() => handleNextPage(currentPage)}>
+            onClick={() => handleNextPage(currentPage)}
+          >
             <ChevronRight />
           </S.PaginationButton>
         </S.PaginationItem>
         <S.PaginationItem>
           <S.PaginationButton
-            disabled={isLastPage}
-            onClick={() => handleNextPage(totalPages - 1)}
+            data-testid="msh--pagination-button-advance"
+            disabled={(totalPages - currentPage) <= rangeLimit}
+            onClick={() => handleNextPage(currentPage + (rangeLimit - 1))}
           >
             <ChevronRightDouble />
           </S.PaginationButton>
