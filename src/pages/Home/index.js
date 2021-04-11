@@ -22,7 +22,6 @@ export function Home() {
   const [, setIsSorted] = useState(false);
   const [pagination, setPagination] = useContext(PaginationContext);
   const [params, setParams] = useState({
-    events: 116,
     offset: null,
   });
   const [error, setError] = useState({
