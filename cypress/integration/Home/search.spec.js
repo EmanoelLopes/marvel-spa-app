@@ -1,99 +1,39 @@
-context('[Search]', () => {
-  beforeEach(() => {
+context('[Busca]', () => {
+  before(() => {
     cy.visit('/');
   });
 
-  it('Input values should be equal to typed value', () => {
-    cy
-      .get('[data-testid="msh--searchbar-input"]')
-      .type('Captain', {
-        delay: 100
-      })
-      .should('have.value', 'Captain');
+  describe('[valor da busca]', () => {
+    it('deve retornar o valor exato da busca', () => {
+      cy.get('[data-testid="msh--searchbar-input"]').clear();
+      cy.get('[data-testid="msh--searchbar-input"]').type('agent brand', { delay: 100 });
+      cy.get('[data-testid="msh--searchbar-input"]').should('have.value', 'agent brand');
+    });
   });
 
-  it('Should list only the Heroes that name matches with the search value', () => {
-    cy
-      .get('[data-testid="msh--searchbar-input"]')
-      .type('J', {
-        delay: 100
-      });
-
-    cy
-      .get('[data-testid="msh--heroes-list"] > li')
-      .its('length')
-      .should('be.equal', 2);
-
-    cy.get('[data-testid="msh--heroes-list"] > li span')
-      .first()
-      .should('have.text', 'Iron Patriot (James Rhodes)');
-
-    cy.get('[data-testid="msh--heroes-list"] > li span')
-      .eq(1)
-      .should('have.text', 'Jessica Jones');
+  describe('[resultados da busca - único resultado]', () => {
+    it('deve retornar na lista o nome do personagem buscado "Agent Brand"', () => {
+      cy.get('[data-testid="msh--searchbar-input"]').clear();
+      cy.get('[data-testid="msh--searchbar-input"]').type('agent brand', { delay: 100 });
+      cy.get('[data-testid="msh--heroes-list"] > li').its('length').should('be.equal', 1);
+      cy.get('[data-testid="msh--heroes-list"] > li span').should('have.text', 'Agent Brand');
+    });
   });
 
-  it('Clear() should return all Heroes list items', () => {
-    cy
-      .get('[data-testid="msh--searchbar-input"]')
-      .type('Captain', {
-        delay: 100
-      })
-
-    cy
-      .get('[data-testid="msh--heroes-list"] > li')
-      .its('length').should('be.equal', 2);
-
-    cy
-      .get('[data-testid="msh--searchbar-input"]')
-      .clear()
-      .should('have.value', '');
-
-    cy
-      .get('[data-testid="msh--heroes-list"] > li')
-      .its('length').should('be.equal', 20);
-  });
-
-  it('Heroes list should matches even the value was typed in UPPERCASE, lowercase or Capitalized', () => {
-    cy.get('[data-testid="msh--searchbar-input"]')
-      .type('CAPTAIN', {
-        delay: 100,
-      });
-
-    cy
-      .get('[data-testid="msh--heroes-list"] > li span')
-      .first()
-      .should('have.text', 'Captain America');
-
-    cy.get('[data-testid="msh--heroes-list"] > li span')
-      .eq(1)
-      .should('have.text', 'Captain Marvel (Carol Danvers)');
-
-    cy
-      .get('[data-testid="msh--searchbar-input"]')
-      .clear()
-      .type('captain', {
-        delay: 100
-      });
-
-    cy.get('[data-testid="msh--heroes-list"] > li span')
-      .first()
-      .should('have.text', 'Captain America');
-
-    cy.get('[data-testid="msh--heroes-list"] > li span')
-      .eq(1)
-      .should('have.text', 'Captain Marvel (Carol Danvers)')
-
-    cy.get('[data-testid="msh--searchbar-input"]').clear().type('Captain', {
-      delay: 100,
+  describe('[resultados da busca - múltiplos resultados]', () => {
+    it('deve retornar como primeiro personsagem do resultadod da "Abomination (Emil Blonsky)"', () => {
+      cy.get('[data-testid="msh--searchbar-input"]').clear();
+      cy.get('[data-testid="msh--searchbar-input"]').type('ab', { delay: 100 });
+      cy.get('[data-testid="msh--heroes-list"] > li').its('length').should('be.equal', 6);
+      cy.get('[data-testid="msh--heroes-list"] > li span').first().should('have.text', 'Abomination (Emil Blonsky)');
     });
 
-    cy.get('[data-testid="msh--heroes-list"] > li span')
-      .first()
-      .should('have.text', 'Captain America');
-
-    cy.get('[data-testid="msh--heroes-list"] > li span')
-      .eq(1)
-      .should('have.text', 'Captain Marvel (Carol Danvers)');
+    it('deve retornar como último personsagem do resultado da busca "Air-Walker (Gabriel Lan)"', () => {
+      cy.get('[data-testid="msh--searchbar-input"]').clear();
+      cy.get('[data-testid="msh--searchbar-input"]').type('ab', { delay: 100 });
+      cy.get('[data-testid="msh--heroes-list"] > li').its('length').should('be.equal', 6);
+      cy.get('[data-testid="msh--heroes-list"] > li span').last().should('have.text', 'Air-Walker (Gabriel Lan)');
+      cy.get('[data-testid="msh--searchbar-input"]').clear();
+    });
   });
 });
