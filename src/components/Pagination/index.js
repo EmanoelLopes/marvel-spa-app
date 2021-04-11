@@ -127,7 +127,7 @@ export function Pagination({ onPageChange }) {
           <S.PaginationButton
             data-testid="msh--pagination-button-advance"
             disabled={(totalPages - currentPage) <= rangeLimit}
-            onClick={() => handleNextPage(currentPage + (rangeLimit - 1))}
+            onClick={() => handleNextPage(currentPage + (rangeLimit - 2))}
           >
             <ChevronRightDouble />
           </S.PaginationButton>
