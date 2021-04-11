@@ -9,8 +9,9 @@ export function Pagination({ onPageChange }) {
   const rangeStart = 1;
   const rangeLimit = 6;
   const [pagination, setPagination] = useContext(PaginationContext);
-  const isFirstPage = pagination?.currentPage === 1;
-  const isLastPage = pagination?.currentPage === pagination?.totalPages;
+  const currentPage = pagination?.currentPage;
+  const isFirstPage = currentPage === 1;
+  const isLastPage = currentPage === pagination?.totalPages;
   const [pageRange, setPageRange] = useState({
     from: rangeStart,
     to: (pagination?.totalPages <= rangeLimit)
@@ -19,7 +20,7 @@ export function Pagination({ onPageChange }) {
   });
 
   const handlePagination = (page) => {
-    if (page + 1 === pagination?.currentPage) return false;
+    if (page + 1 === currentPage) return false;
     setPagination(() => ({
       ...pagination,
       currentPage: page,
@@ -60,17 +61,15 @@ export function Pagination({ onPageChange }) {
     let unmounted = false;
 
     if(!unmounted) {
-      getPageRange();
-
       setPageRange(() => ({
-        from: pagination?.currentPage,
-        to: pagination?.currentPage + (rangeLimit - 1),
+        from: currentPage,
+        to: currentPage + (rangeLimit - 1),
       }));
     }
     return () => {
       unmounted = true;
     };
-  }, [pagination?.currentPage]);
+  }, [currentPage]);
 
   return (
     <S.PaginationWrapper data-testid="msh--pagination">
@@ -86,7 +85,7 @@ export function Pagination({ onPageChange }) {
           <S.PaginationButton
             disabled={isFirstPage}
             onClick={() => {
-              handlePreviousPage(pagination?.currentPage);
+              handlePreviousPage(currentPage);
             }}>
             <ChevronLeft />
           </S.PaginationButton>
@@ -95,8 +94,8 @@ export function Pagination({ onPageChange }) {
           .map((value) => (
             <S.PaginationItem key={value}>
               <S.PaginationButton
-                disabled={pagination?.currentPage === (value)}
-                isActive={(value) === pagination?.currentPage}
+                disabled={currentPage === (value)}
+                isActive={(value) === currentPage}
                 onClick={() => handlePagination(value)}
               >
                 {value}
