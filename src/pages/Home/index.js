@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect, useCallback, useContext } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { PaginationContext } from 'contexts/pagination/pagination.context';
 import {
   Alert,
@@ -146,12 +146,7 @@ export function Home() {
             />
           )}
         </Main>
-        {pagination.totalPages >= 2 && (
-          <Fragment>
-            <p>{pagination?.currentPage} / {pagination?.totalPages}</p>
-            <Pagination onPageChange={handlePagination} />
-          </Fragment>
-        )}
+        {pagination.totalPages >= 2 && <Pagination onPageChange={handlePagination} />}
       </S.Container>
       <Footer />
     </S.Wrapper>

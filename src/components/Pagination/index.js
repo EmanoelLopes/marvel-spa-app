@@ -75,6 +75,13 @@ export function Pagination({ onPageChange }) {
 
   return (
     <S.PaginationWrapper data-testid="msh--pagination">
+      <S.PaginationInfo>
+        <span data-testid="msh--home-pagination-current-page">
+          {pagination?.currentPage}
+        </span> / <span data-testid="msh--home-pagination-total-pages">
+          {pagination?.totalPages}
+        </span>
+      </S.PaginationInfo>
       <S.PaginationList>
         <S.PaginationItem>
           <S.PaginationButton
@@ -98,7 +105,7 @@ export function Pagination({ onPageChange }) {
           .map((value) => (
             <S.PaginationItem key={value}>
               <S.PaginationButton
-                data-testid={`msh--pagination-button-page-${currentPage}`}
+                data-testid={`msh--pagination-button-page-${value}`}
                 disabled={currentPage === (value)}
                 isActive={(value) === currentPage}
                 onClick={() => handlePagination(value)}

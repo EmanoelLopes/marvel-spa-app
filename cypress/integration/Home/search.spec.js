@@ -1,4 +1,4 @@
-context('Search Bar', () => {
+context('[Search]', () => {
   beforeEach(() => {
     cy.visit('/');
   });

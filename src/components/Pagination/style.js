@@ -4,11 +4,23 @@ import { themes, media } from 'styles';
 export const PaginationWrapper = styled.section`
   align-items: center;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   min-height: 50px;
   padding: 1rem;
   margin-bottom: 2rem;
   width: 100%;
+`;
+
+export const PaginationInfo = styled.p`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 1rem 0;
+
+  > span {
+    margin: 0 0.5rem;
+  }
 `;
 
 export const PaginationList = styled.ul`
