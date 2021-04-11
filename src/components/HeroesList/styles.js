@@ -27,14 +27,6 @@ export const List = styled.ul`
   > a {
     min-width: 220px;
   }
-
-  &[data-only-favorites='true'] {
-    grid-template-rows: repeat(1, auto);
-
-    > li[data-is-favorite='false'] {
-      display: none;
-    }
-  }
 `;
 
 export const ListItem = styled.li`

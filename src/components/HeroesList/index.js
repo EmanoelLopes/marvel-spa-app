@@ -8,39 +8,39 @@ import { httpsTransform } from 'utils/helpers';
 import * as S from './styles';
 
 export function HeroesList({ heroes, value, onlyFavorites }) {
-  const [storedValue, setStoreValue] = useLocalStorage([], 'favorites');
-  const [favorites, setFavorites] = useState(storedValue);
+  const [storedFavorites, setStoredFavorites] = useLocalStorage([], 'favorites');
+  const [favorites, setFavorites] = useState(storedFavorites);
   const filterdHeroes = (hero) => hero.name.toLowerCase().includes(value.toLowerCase());
 
-  const toggleToFavorites = (id) => {
-    const removeValues = () => {
-      const elementIndex = favorites.findIndex((i) => i === id);
-      const newFavorites = favorites.filter((item) => favorites[elementIndex] !== item);
-      setFavorites(newFavorites);
-      setStoreValue(newFavorites);
-      return false;
-    };
-
-    const addValues = () => {
-      const newFavorites = favorites.concat(id);
+  const toggleToFavorites = (hero) => {
+    const addFavorite = () => {
+      const newFavorites = favorites.concat(hero);
       if (newFavorites.length <= 5) {
         setFavorites(newFavorites);
-        setStoreValue(newFavorites);
+        setStoredFavorites(newFavorites);
       }
       return false;
     };
 
-    return favorites.includes(id) ? removeValues() : addValues();
+    const removeFavorite = () => {
+      const elementIndex = favorites.findIndex((item) => item.id === hero.id);
+      const newFavorites = favorites.filter((item) => favorites[elementIndex].id !== item.id);
+      setFavorites(newFavorites);
+      setStoredFavorites(newFavorites);
+      return false;
+    };
+
+    return favorites.includes(hero) ? removeFavorite() : addFavorite();
   };
 
   return (
     <Fragment>
-      {onlyFavorites && !storedValue.length && (
+      {onlyFavorites && !storedFavorites.length && (
         <Alert message={'Você não tem nenhum favorito selecionado!'} id="1" />
       )}
-      <S.List data-only-favorites={onlyFavorites} data-testid="msh--heroes-list">
-        {heroes.filter(filterdHeroes).map((hero) => (
-          <S.ListItem key={hero.id} data-is-favorite={storedValue.includes(hero.id)}>
+      <S.List data-testid="msh--heroes-list">
+        {!onlyFavorites ? heroes.filter(filterdHeroes).map((hero) => (
+          <S.ListItem key={hero.id}>
             <Link key={hero.id} to={`/hero/${hero.id}`}>
               <S.ListItemImage
                 data-testid={`msh--hero-${hero.id}-bg`}
@@ -51,12 +51,29 @@ export function HeroesList({ heroes, value, onlyFavorites }) {
             <S.ListeItemHerosDetails>
               <span>{hero.name}</span>
               <S.ToggleFavorite
-                onClick={() => {
-                  toggleToFavorites(hero.id);
-                }}
+                onClick={() => toggleToFavorites(hero)}
                 data-testid={`msh--hero-${hero.id}`}
               >
-                {storedValue.includes(hero.id) ? <HeartFull /> : <HeartEmpty />}
+                {storedFavorites.includes(hero) ? <HeartFull /> : <HeartEmpty />}
+              </S.ToggleFavorite>
+            </S.ListeItemHerosDetails>
+          </S.ListItem>
+        )) : storedFavorites.map((hero) => (
+          <S.ListItem key={hero.id}>
+            <Link key={hero.id} to={`/hero/${hero.id}`}>
+              <S.ListItemImage
+                data-testid={`msh--hero-${hero.id}-bg`}
+                bg={`${httpsTransform(hero.thumbnail?.path)}.${hero.thumbnail?.extension}`}
+                title={hero.name}
+              />
+            </Link>
+            <S.ListeItemHerosDetails>
+              <span>{hero.name}</span>
+              <S.ToggleFavorite
+                onClick={() => toggleToFavorites(hero)}
+                data-testid={`msh--hero-${hero.id}`}
+              >
+                {storedFavorites.includes(hero) ? <HeartFull /> : <HeartEmpty />}
               </S.ToggleFavorite>
             </S.ListeItemHerosDetails>
           </S.ListItem>
