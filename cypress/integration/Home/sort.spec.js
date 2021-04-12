@@ -1,84 +1,30 @@
-context('Sort by Name', () => {
-  beforeEach(() => {
+context('[Ordenação por nome]', () => {
+  before(() => {
     cy.visit('/');
   });
 
-  it('Should have reverse all the items by name', () => {
-    cy
-      .get('[data-testid="msh--heroes-list"] > li span')
-      .first()
-      .should('have.text', 'Avengers');
-
-    cy
-      .get('[data-testid="msh--heroes-list"] > li span')
-      .last()
-      .should('have.text', 'Jessica Jones');
-
-    cy
-      .wait(2000)
-      .get('[data-testid="msh--toggle-label"]')
-      .click();
-
-    cy
-      .get('[data-testid="msh--heroes-list"] > li span')
-      .first()
-      .should('have.text', 'Jessica Jones');
-
-    cy
-      .get('[data-testid="msh--heroes-list"] > li span')
-      .last()
-      .should('have.text', 'Avengers');
-
-    cy
-      .get('[data-testid="msh--toggle-label"]')
-      .click();
+  describe('[Ordenacão padrão]', () => {
+    it('o primeiro resultado deve ser "3-D Man" e o último "Ajaxis"', () => {
+      cy.get('[data-testid="msh--heroes-list"] > li span').first().should('have.text', '3-D Man');
+      cy.get('[data-testid="msh--heroes-list"] > li span').last().should('have.text', 'Ajaxis');
+    });
   });
 
-  it('should reverse all the items that matches with the value in the Search Bar', () => {
-    cy
-      .get('[data-testid="msh--searchbar"]')
-      .type('o', { delay: 100 })
+  describe('[Ordenacão inversa]', () => {
+    it('o primeiro resultado deve ser "3-D Man" e o último "Ajaxis"', () => {
+      cy.get('[data-testid="msh--toggle"]').click();
+      cy.wait(200);
+      cy.get('[data-testid="msh--heroes-list"] > li span').first().should('have.text', 'Ajaxis');
+      cy.get('[data-testid="msh--heroes-list"] > li span').last().should('have.text', '3-D Man');
+    });
+  });
 
-    cy
-      .get('[data-testid="msh--heroes-list"] > li span')
-      .first()
-      .should('have.text', 'Black Bolt');
-
-    cy
-      .get('[data-testid="msh--heroes-list"] > li span')
-      .last()
-      .should('have.text', 'Jessica Jones');
-
-    cy
-      .get('[data-testid="msh--toggle-label"]')
-      .click();
-
-    cy
-      .get('[data-testid="msh--heroes-list"] > li span')
-      .first()
-      .should('have.text', 'Jessica Jones');
-
-    cy
-      .get('[data-testid="msh--heroes-list"] > li span')
-      .last()
-      .should('have.text', 'Black Bolt');
-
-    cy
-      .get('[data-testid="msh--searchbar-input"]')
-      .clear();
-
-    cy
-      .get('[data-testid="msh--toggle-label"]')
-      .click();
-
-    cy
-      .get('[data-testid="msh--heroes-list"] > li span')
-      .first()
-      .should('have.text', 'Avengers');
-
-    cy
-      .get('[data-testid="msh--heroes-list"] > li span')
-      .last()
-      .should('have.text', 'Jessica Jones');
+  describe('[Ordenacão após a busca]', () => {
+    it('o primeiro resultado deve ser "3-D Man" e o último "Ajaxis"', () => {
+      cy.get('[data-testid="msh--toggle"]').click();
+      cy.wait(200);
+      // cy.get('[data-testid="msh--heroes-list"] > li span').first().should('have.text', '3-D Man');
+      // cy.get('[data-testid="msh--heroes-list"] > li span').last().should('have.text', 'Ajaxis');
+    });
   });
 });
