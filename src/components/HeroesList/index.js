@@ -13,6 +13,8 @@ export function HeroesList({ heroes, value, onlyFavorites }) {
   const filterdHeroes = (hero) => hero.name.toLowerCase().includes(value.toLowerCase());
 
   const toggleToFavorites = (hero) => {
+    const favoritesIds = favorites.map((item) => item.id);
+
     const addFavorite = () => {
       const newFavorites = favorites.concat(hero);
       if (newFavorites.length <= 5) {
@@ -30,16 +32,16 @@ export function HeroesList({ heroes, value, onlyFavorites }) {
       return false;
     };
 
-    return favorites.includes(hero) ? removeFavorite() : addFavorite();
+    return favoritesIds.includes(hero.id) ? removeFavorite() : addFavorite();
   };
 
   return (
     <Fragment>
-      {onlyFavorites && !storedFavorites.length && (
+      {onlyFavorites && !favorites.length && (
         <Alert message={'Você não tem nenhum favorito selecionado!'} id="1" />
       )}
       <S.List data-testid="msh--heroes-list">
-        {!onlyFavorites ? heroes.filter(filterdHeroes).map((hero) => (
+        {!onlyFavorites ? heroes.filter(filterdHeroes).map((hero, index) => (
           <S.ListItem key={hero.id}>
             <Link key={hero.id} to={`/hero/${hero.id}`}>
               <S.ListItemImage
@@ -54,11 +56,11 @@ export function HeroesList({ heroes, value, onlyFavorites }) {
                 onClick={() => toggleToFavorites(hero)}
                 data-testid={`msh--hero-${hero.id}`}
               >
-                {storedFavorites.includes(hero) ? <HeartFull /> : <HeartEmpty />}
+                {hero.id === favorites[index]?.id ? <HeartFull /> : <HeartEmpty />}
               </S.ToggleFavorite>
             </S.ListeItemHerosDetails>
           </S.ListItem>
-        )) : storedFavorites.map((hero) => (
+        )) : favorites.map((hero) => (
           <S.ListItem key={hero.id}>
             <Link key={hero.id} to={`/hero/${hero.id}`}>
               <S.ListItemImage
@@ -73,7 +75,7 @@ export function HeroesList({ heroes, value, onlyFavorites }) {
                 onClick={() => toggleToFavorites(hero)}
                 data-testid={`msh--hero-${hero.id}`}
               >
-                {storedFavorites.includes(hero) ? <HeartFull /> : <HeartEmpty />}
+                {favorites.includes(hero) ? <HeartFull /> : <HeartEmpty />}
               </S.ToggleFavorite>
             </S.ListeItemHerosDetails>
           </S.ListItem>
