@@ -1,19 +1,23 @@
 context('[Página de Personagem]', () => {
-  describe('Página de personagem com descrição - Wolverine', () => {
-    it('Deve conter o título com o nome do personagem da página"', () => {
-      const description = "Born with super-human senses and the power to heal from almost any wound, Wolverine was captured by a secret Canadian organization and given an unbreakable skeleton and claws. Treated like an animal, it took years for him to control himself. Now, he's a premiere member of both the X-Men and the Avengers.";
-
-      cy.visit('/hero/1009718');
-      cy.get('h2').first().should('have.text', 'Wolverine');
-      cy.get('h2').eq(1).should('have.text', 'Últimos lançamentos');
-      cy.get('p').eq(1).should('have.text', description);
+  beforeEach(() => {
+    cy.fixture('hero').then(function(data) {
+      this.data = data;
     });
   });
 
-  describe('Página de personagem sem descrição - 3-D Man', () => {
-    it('Deve conter o título com o nome do personagem da página', () => {
+  describe('Página de personagem com descrição - Wolverine', function() {
+    it('Deve conter o título com o nome do personagem da página"', function() {
+      cy.visit('/hero/1009718');
+      cy.get('h2').first().should('have.text', this.data.hero.wolverine.name);
+      cy.get('h2').eq(1).should('have.text', 'Últimos lançamentos');
+      cy.get('p').eq(1).should('have.text', this.data.hero.wolverine.description);
+    });
+  });
+
+  describe('Página de personagem sem descrição - 3-D Man', function() {
+    it('Deve conter o título com o nome do personagem da página', function() {
       cy.visit('/hero/1011334');
-      cy.get('h2').first().should('have.text', '3-D Man');
+      cy.get('h2').first().should('have.text', this.data.hero['3d-man'].name);
       cy.get('h2').eq(1).should('have.text', 'Últimos lançamentos');
       cy.get('p').eq(1).should('have.text', 'Nenhuma descrição fornecida.');
     });
