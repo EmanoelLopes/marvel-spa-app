@@ -12,10 +12,9 @@ export function Filters({ amount, onClick, selectFavorites, onlyFavorites }) {
         <S.SorterWrapper>
           <HeroIcon />
           <span>Ordenar por nome - A/Z</span>
-          <Toggle toggle={onClick} />
+          <Toggle onlyFavorites={onlyFavorites} toggle={onClick} />
         </S.SorterWrapper>
         <S.SelectFavorites
-          data-only-favorites={onlyFavorites}
           onClick={selectFavorites}
           data-testid="msh--show-only-favorites"
         >

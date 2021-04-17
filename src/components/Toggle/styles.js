@@ -26,6 +26,10 @@ export const SwitchToggle = styled.label`
     box-shadow: 0 0 5px ${themes.main.colors.red};
     transform: translateX(26px);
   }
+
+  input:checked[disabled] + span:before {
+    box-shadow: 0 0 5px ${themes.main.colors.lightGrey};
+  }
 `;
 
 export const SliderToggle = styled.span`
@@ -38,6 +42,12 @@ export const SliderToggle = styled.span`
   right: 0;
   top: 0;
   transition: 0.4s;
+
+  &[disabled] {
+    &::before {
+      background-color: ${themes.main.colors.lightGrey};
+    }
+  }
 
   &::before {
     background-color: ${themes.main.colors.red};

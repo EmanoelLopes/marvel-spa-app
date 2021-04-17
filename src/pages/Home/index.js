@@ -137,10 +137,16 @@ export function Home() {
         />
         <Main>
           {isLoading && <Loader />}
+          {(!heroes.length && !isLoading) && (
+            <Alert
+              message={`Nenhum heroi encontrado. :/`}
+              id="404"
+            />
+          )}
           {error.hasError ? (
             <Alert
               message={`Error ${error.statusCode}: ${error.message}`}
-              messageId={`error-${error.statusCode}`}
+              id={`error-${error.statusCode}`}
             />
           ) : (
             <HeroesList

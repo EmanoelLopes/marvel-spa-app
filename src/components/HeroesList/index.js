@@ -10,7 +10,17 @@ import * as S from './styles';
 export function HeroesList({ heroes, onlyFavorites }) {
   const [storedFavorites, setStoredFavorites] = useLocalStorage([], 'favorites');
   const [favorites, setFavorites] = useState(storedFavorites);
-  const isFavorite = (arr, id) => arr.some((item) => item.id === id);
+  const isFavorite = (arr, id) => arr.some((hero) => hero.id === id);
+
+  const sortHeroesByName = (arr) => {
+    return arr.slice(0).sort((a, b) => {
+      const nameA = a.name.toLowerCase();
+      const nameB = b.name.toLowerCase();
+      if (nameA < nameB) return -1;
+      if (nameA > nameB) return 1;
+      return 0;
+    });
+  };
 
   const toggleToFavorites = (hero) => {
     const favoritesIds = favorites.map((item) => item.id);
@@ -18,8 +28,8 @@ export function HeroesList({ heroes, onlyFavorites }) {
     const addFavorite = () => {
       const newFavorites = favorites.concat(hero);
       if (newFavorites.length <= 5) {
-        setFavorites(newFavorites);
-        setStoredFavorites(newFavorites);
+        setFavorites(sortHeroesByName(newFavorites));
+        setStoredFavorites(sortHeroesByName(newFavorites));
       }
       return false;
     };
@@ -32,7 +42,7 @@ export function HeroesList({ heroes, onlyFavorites }) {
       return false;
     };
 
-    return favoritesIds.includes(hero.id) ? removeFavorite() : addFavorite();
+    return favoritesIds.includes(hero?.id) ? removeFavorite() : addFavorite();
   };
 
   return (
