@@ -11,7 +11,8 @@ import {
   Pagination,
   SearchBar,
 } from 'components';
-import { getHeroes } from 'services';
+import { getHeroes, getHeroesByName } from 'services';
+import { useDebounce } from 'hooks';
 import * as S from 'styles/styled';
 
 export function Home() {
@@ -29,6 +30,9 @@ export function Home() {
     statusCode: 0,
     message: 'Eita nóis! Aconteceu uma treta aqui :/!',
   });
+  const debouncedSearch = useDebounce(searchValue, 500);
+  const handleClick = (e) => setSearchValue(e.target.value);
+  const handleSearch = (e) => setSearchValue(e.target.value);
 
   const updatePaginationState = () => {
     let newValue;
@@ -60,26 +64,34 @@ export function Home() {
     (queryParams) => {
       setIsLoading(true);
 
-      return getHeroes(queryParams)
-        .then(({ data }) => {
-          const { results } = data.data;
-          setHeroes(results);
-          setIsLoading(false);
-          setPagination((previousValue) => ({
-            ...previousValue,
-            totalPages: Math.ceil(data.data.total / 20),
-          }));
-        })
-        .catch(({ response }) => {
-          setError({
-            hasError: true,
-            statusCode: response?.status,
-            message: response?.data.message,
-          });
-          setIsLoading(false);
+      const handleSuccess = (data) => {
+        const { results } = data?.data;
+        setHeroes(results);
+        setIsLoading(false);
+        setPagination((previousValue) => ({
+          ...previousValue,
+          totalPages: Math.ceil(data.data.total / 20),
+        }));
+      };
+
+      const handleErrors = (err) => {
+        setError({
+          hasError: true,
+          statusCode: err?.status,
+          message: err?.data.message,
         });
+        setIsLoading(false);
+      };
+
+      return (!debouncedSearch.length)
+        ? getHeroes(queryParams)
+          .then(({ data }) => handleSuccess(data))
+          .catch(({ response }) => handleErrors(response))
+        : getHeroesByName(debouncedSearch)
+          .then(({ data }) => handleSuccess(data))
+          .catch(({ response }) => handleErrors(response));
     },
-    [setPagination]
+    [debouncedSearch, setPagination]
   );
 
   /* eslint-disable */
@@ -101,14 +113,6 @@ export function Home() {
     setHeroes(heroes.reverse());
   };
 
-  const handleClick = (e) => {
-    setSearchValue(e.target.value);
-  };
-
-  const handleChange = (e) => {
-    setSearchValue(e.target.value);
-  };
-
   useEffect(() => {
     let unmounted = false;
 
@@ -124,7 +128,7 @@ export function Home() {
     <S.Wrapper data-testid="msh--page-home">
       <S.Container>
         <Header />
-        <SearchBar onChange={handleChange} onClick={handleClick} />
+        <SearchBar onChange={handleSearch} onClick={handleClick} />
         <Filters
           amount={heroes.length}
           onClick={toggleSorted}
