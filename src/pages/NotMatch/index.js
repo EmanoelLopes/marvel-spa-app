@@ -7,7 +7,7 @@ export function NotMatch() {
     <S.Wrapper>
       <S.Container>
         <Header />
-        <h1>Página não encontrada :/</h1>
+        <h2>Página não encontrada :/</h2>
       </S.Container>
       <Footer />
     </S.Wrapper>

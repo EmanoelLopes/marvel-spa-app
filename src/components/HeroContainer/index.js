@@ -9,7 +9,7 @@ export function HeroContainer({ data }) {
     <S.HeroWrapper data-testid="msh--hero-container">
       <S.HeroMainInfo>
         <article>
-          <h1>{data.name}</h1>
+          <h2>{data.name}</h2>
           <p>{data.description || 'Nenhuma descrição fornecida.'}</p>
           <h2>Últimos lançamentos</h2>
           <S.List>
