@@ -10,14 +10,12 @@ import * as S from './styles';
 export function HeroesList({ heroes, onlyFavorites }) {
   const [storedFavorites, setStoredFavorites] = useLocalStorage([], 'favorites');
   const [favorites, setFavorites] = useState(storedFavorites);
-  const isFavorite = (arr, id) => arr.some((hero) => hero.id === id);
+  const isFavorite = (array, id) => array.some((hero) => hero.id === id);
 
-  const sortHeroesByName = (arr) => {
-    return arr.slice(0).sort((a, b) => {
-      const nameA = a.name.toLowerCase();
-      const nameB = b.name.toLowerCase();
-      if (nameA < nameB) return -1;
-      if (nameA > nameB) return 1;
+  const sortHeroesByName = (array) => {
+    return array.sort((a, b) => {
+      if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+      if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
       return 0;
     });
   };
