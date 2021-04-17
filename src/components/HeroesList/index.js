@@ -44,11 +44,17 @@ export function HeroesList({ heroes, onlyFavorites }) {
         {!onlyFavorites && heroes.map((hero) => (
           <S.ListItem key={hero.id}>
             <Link key={hero.id} to={`/hero/${hero.id}`}>
-              <S.ListItemImage
+              <S.ListItemImageWrapper
                 data-testid={`msh--hero-${hero.id}-bg`}
-                bg={`${httpsTransform(hero.thumbnail?.path)}.${hero.thumbnail?.extension}`}
-                title={hero.name}
-              />
+              >
+                <S.ListItemImage
+                  loading="lazy"
+                  src={`${httpsTransform(hero.thumbnail?.path)}.${hero.thumbnail?.extension}`}
+                  alt={hero.name}
+                  width="220"
+                  height="260"
+                />
+              </S.ListItemImageWrapper>
             </Link>
             <S.ListeItemHerosDetails>
               <span>{hero.name}</span>
@@ -64,11 +70,17 @@ export function HeroesList({ heroes, onlyFavorites }) {
         {onlyFavorites && favorites.map((hero) => (
           <S.ListItem key={hero.id}>
             <Link key={hero.id} to={`/hero/${hero.id}`}>
-              <S.ListItemImage
+              <S.ListItemImageWrapper
                 data-testid={`msh--hero-${hero.id}-bg`}
-                bg={`${httpsTransform(hero.thumbnail?.path)}.${hero.thumbnail?.extension}`}
-                title={hero.name}
-              />
+              >
+                <S.ListItemImage
+                  loading="lazy"
+                  src={`${httpsTransform(hero.thumbnail?.path)}.${hero.thumbnail?.extension}`}
+                  alt={hero.name}
+                  width="220"
+                  height="260"
+                />
+              </S.ListItemImageWrapper>
             </Link>
             <S.ListeItemHerosDetails>
               <span>{hero.name}</span>

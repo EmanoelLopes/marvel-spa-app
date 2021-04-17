@@ -37,13 +37,14 @@ export const ListItem = styled.li`
   width: 220px;
 `;
 
-export const ListItemImage = styled.div`
-  background-image: url(${(props) => props.bg});
-  background-position: left center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  border-bottom: 5px solid ${themes.main.colors.red};
+export const ListItemImageWrapper = styled.div`
   height: 260px;
+  width: 100%;
+`;
+
+export const ListItemImage = styled.img`
+  border-bottom: 5px solid ${themes.main.colors.red};
+  display: block;
   width: 100%;
 `;
 
