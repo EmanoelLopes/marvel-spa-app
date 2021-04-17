@@ -46,6 +46,7 @@ export function Pagination({ onPageChange }) {
   };
 
   const handleNextPage = (page) => {
+    if (isLastPage) return false;
     setPagination(() => ({
       ...pagination,
       currentPage: page + 1,
