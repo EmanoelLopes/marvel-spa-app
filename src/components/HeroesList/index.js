@@ -36,6 +36,7 @@ export function HeroesList({ heroes, onlyFavorites }) {
 
   return (
     <Fragment>
+      <S.FavoritesWrapper>{favorites.length > 0 && (<span>{favorites.length} de 5 <HeartFull /></span>)}</S.FavoritesWrapper>
       {onlyFavorites && !favorites.length && (
         <Alert message={'Você não tem nenhum favorito selecionado!'} id="1" />
       )}

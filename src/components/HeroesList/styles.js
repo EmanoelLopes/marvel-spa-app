@@ -62,3 +62,25 @@ export const ToggleFavorite = styled.button`
   display: flex;
   justify-content: center;
 `;
+
+export const FavoritesWrapper = styled.p`
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  min-height: 32px;
+  width: 100%;
+
+  ${media.desktop`
+    justify-content: flex-end;
+  `}
+
+  span {
+    align-items: center;
+    display: flex;
+  }
+
+  span > svg {
+    margin: 0 8px;
+  }
+`;
