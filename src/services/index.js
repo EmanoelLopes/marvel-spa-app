@@ -30,6 +30,7 @@ const getHeroes = async (params) =>
       ...params,
     },
   });
+
 const getHero = async (id) =>
   await instance.get(`${apiRoutes.characters}/${id}`, {
     params: {
@@ -37,4 +38,12 @@ const getHero = async (id) =>
     },
   });
 
-export { getHero, getHeroes };
+const getHeroesByName = async (value) =>
+  await instance.get(apiRoutes.characters, {
+    params: {
+      ...defaultParams,
+      nameStartsWith: value,
+    },
+  });
+
+export { getHero, getHeroes, getHeroesByName };

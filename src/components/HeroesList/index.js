@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { array, string, bool } from 'prop-types';
+import { array, bool } from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Alert } from 'components';
 import { HeartEmpty, HeartFull } from 'components/Icons';
@@ -7,10 +7,9 @@ import { useLocalStorage } from 'hooks';
 import { httpsTransform } from 'utils/helpers';
 import * as S from './styles';
 
-export function HeroesList({ heroes, value, onlyFavorites }) {
+export function HeroesList({ heroes, onlyFavorites }) {
   const [storedFavorites, setStoredFavorites] = useLocalStorage([], 'favorites');
   const [favorites, setFavorites] = useState(storedFavorites);
-  const filterdHeroes = (hero) => hero.name.toLowerCase().includes(value.toLowerCase());
 
   const toggleToFavorites = (hero) => {
     const favoritesIds = favorites.map((item) => item.id);
@@ -41,7 +40,7 @@ export function HeroesList({ heroes, value, onlyFavorites }) {
         <Alert message={'Você não tem nenhum favorito selecionado!'} id="1" />
       )}
       <S.List data-testid="msh--heroes-list">
-        {!onlyFavorites ? heroes.filter(filterdHeroes).map((hero, index) => (
+        {!onlyFavorites ? heroes.map((hero, index) => (
           <S.ListItem key={hero.id}>
             <Link key={hero.id} to={`/hero/${hero.id}`}>
               <S.ListItemImage
@@ -87,12 +86,10 @@ export function HeroesList({ heroes, value, onlyFavorites }) {
 
 HeroesList.defaultProps = {
   heroes: [],
-  value: '',
   onlyFavorites: false,
 };
 
 HeroesList.propTypes = {
   heroes: array,
-  value: string,
   onlyFavorites: bool,
 };
