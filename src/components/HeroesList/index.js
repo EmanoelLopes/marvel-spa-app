@@ -10,6 +10,7 @@ import * as S from './styles';
 export function HeroesList({ heroes, onlyFavorites }) {
   const [storedFavorites, setStoredFavorites] = useLocalStorage([], 'favorites');
   const [favorites, setFavorites] = useState(storedFavorites);
+  const isFavorite = (arr, id) => arr.some((item) => item.id === id);
 
   const toggleToFavorites = (hero) => {
     const favoritesIds = favorites.map((item) => item.id);
@@ -40,7 +41,7 @@ export function HeroesList({ heroes, onlyFavorites }) {
         <Alert message={'Você não tem nenhum favorito selecionado!'} id="1" />
       )}
       <S.List data-testid="msh--heroes-list">
-        {!onlyFavorites ? heroes.map((hero, index) => (
+        {!onlyFavorites && heroes.map((hero) => (
           <S.ListItem key={hero.id}>
             <Link key={hero.id} to={`/hero/${hero.id}`}>
               <S.ListItemImage
@@ -55,11 +56,12 @@ export function HeroesList({ heroes, onlyFavorites }) {
                 onClick={() => toggleToFavorites(hero)}
                 data-testid={`msh--hero-${hero.id}`}
               >
-                {hero.id === favorites[index]?.id ? <HeartFull /> : <HeartEmpty />}
+                {isFavorite(favorites, hero.id) ? <HeartFull /> : <HeartEmpty />}
               </S.ToggleFavorite>
             </S.ListeItemHerosDetails>
           </S.ListItem>
-        )) : favorites.map((hero) => (
+        ))}
+        {onlyFavorites && favorites.map((hero) => (
           <S.ListItem key={hero.id}>
             <Link key={hero.id} to={`/hero/${hero.id}`}>
               <S.ListItemImage
