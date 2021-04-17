@@ -4,21 +4,12 @@ import { Link } from 'react-router-dom';
 import { Alert } from 'components';
 import { HeartEmpty, HeartFull } from 'components/Icons';
 import { useLocalStorage } from 'hooks';
-import { httpsTransform } from 'utils/helpers';
+import { httpsTransform, sortByName, isContainedById } from 'utils/helpers';
 import * as S from './styles';
 
 export function HeroesList({ heroes, onlyFavorites }) {
   const [storedFavorites, setStoredFavorites] = useLocalStorage([], 'favorites');
   const [favorites, setFavorites] = useState(storedFavorites);
-  const isFavorite = (array, id) => array.some((hero) => hero.id === id);
-
-  const sortHeroesByName = (array) => {
-    return array.sort((a, b) => {
-      if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
-      if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
-      return 0;
-    });
-  };
 
   const toggleToFavorites = (hero) => {
     const favoritesIds = favorites.map((item) => item.id);
@@ -26,8 +17,8 @@ export function HeroesList({ heroes, onlyFavorites }) {
     const addFavorite = () => {
       const newFavorites = favorites.concat(hero);
       if (newFavorites.length <= 5) {
-        setFavorites(sortHeroesByName(newFavorites));
-        setStoredFavorites(sortHeroesByName(newFavorites));
+        setFavorites(sortByName(newFavorites));
+        setStoredFavorites(sortByName(newFavorites));
       }
       return false;
     };
@@ -64,7 +55,7 @@ export function HeroesList({ heroes, onlyFavorites }) {
                 onClick={() => toggleToFavorites(hero)}
                 data-testid={`msh--hero-${hero.id}`}
               >
-                {isFavorite(favorites, hero.id) ? <HeartFull /> : <HeartEmpty />}
+                {isContainedById(favorites, hero.id) ? <HeartFull /> : <HeartEmpty />}
               </S.ToggleFavorite>
             </S.ListeItemHerosDetails>
           </S.ListItem>

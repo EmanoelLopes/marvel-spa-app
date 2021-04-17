@@ -1,4 +1,4 @@
-import { range, httpsTransform } from './helpers';
+import { range, httpsTransform, sortByName, isContainedById } from './helpers';
 
 describe('[Helpers]', () => {
   describe('range', () => {
@@ -20,6 +20,49 @@ describe('[Helpers]', () => {
 
       expect(httpsTransform(siteURL).includes('https')).toBeTruthy();
       expect(httpsTransform(imageURL).includes('https')).toBeTruthy();
+    })
+  });
+
+  describe('sortByName', () => {
+    it('should sort array of objects by name key', () => {
+      const arrayOfHeroes = [
+        { id: 1, name: 'Zemo' },
+        { id: 2, name: 'Wolverine' },
+        { id: 3, name: 'Storm' },
+        { id: 4, name: 'Abomination' },
+        { id: 5, name: 'Cyclope' },
+      ];
+
+      expect(arrayOfHeroes[0].name).toEqual('Zemo');
+      expect(arrayOfHeroes[4].name).toEqual('Cyclope');
+
+      const sortedArrayOfHeroes = sortByName(arrayOfHeroes);
+
+      expect(sortedArrayOfHeroes[0].name).toEqual('Abomination');
+      expect(sortedArrayOfHeroes[4].name).toEqual('Zemo');
+    })
+  });
+
+  describe('isContainedById', () => {
+    it('should contain or not elements by id', () => {
+      const arrayOfHeroes = [
+        { id: 1, name: 'Zemo' },
+        { id: 2, name: 'Wolverine' },
+        { id: 3, name: 'Storm' },
+        { id: 4, name: 'Abomination' },
+        { id: 5, name: 'Cyclope' },
+      ];
+
+      const favoritesHeroes = [
+        { id: 2, name: 'Wolverine' },
+        { id: 3, name: 'Storm' },
+      ];
+
+      const zemo = arrayOfHeroes[0];
+      const wolverine = arrayOfHeroes[1];
+
+      expect(isContainedById(favoritesHeroes, zemo.id)).toBeFalsy();
+      expect(isContainedById(favoritesHeroes, wolverine.id)).toBeTruthy();
     })
   });
 });

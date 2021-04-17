@@ -6,6 +6,7 @@ import { Toggle } from 'components';
 describe('[Components] - <Toggle />', () => {
   const props = {
     toggle: jest.fn(),
+    onlyFavorites: false,
   };
 
   it('should render Toggle without breaking', () => {
