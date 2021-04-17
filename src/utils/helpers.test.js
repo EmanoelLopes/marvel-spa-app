@@ -25,6 +25,9 @@ describe('[Helpers]', () => {
 
   describe('sortByName', () => {
     it('should sort array of objects by name key', () => {
+      const emptyArrayOfHeroes = [];
+      expect(sortByName(emptyArrayOfHeroes)).toEqual([]);
+
       const arrayOfHeroes = [
         { id: 1, name: 'Zemo' },
         { id: 2, name: 'Wolverine' },
