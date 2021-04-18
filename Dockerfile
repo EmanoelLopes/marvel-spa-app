@@ -11,8 +11,9 @@ ENV PATH /usr/src/app/node_modules/.bin:$PATH
 # install and cache app dependencies
 COPY package.json /usr/src/app/package.json
 RUN yarn install --silent
-COPY . /user/src/app
+COPY . /usr/src/app
 
+# port 
 EXPOSE 5001
 
 # start app

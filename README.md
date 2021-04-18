@@ -6,6 +6,17 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Stack
+
+* [React](https://reactjs.org/)
+* [Styled Components](https://www.styled-components.com/)
+* [Eslint](https://eslint.org/)
+* [Prettier](https://prettier.io/)
+* [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+* [Cypress](https://www.cypress.io/)
+* [Docker](https://www.docker.com/)
+* [Docker Compose](https://docs.docker.com/compose/)
+
 ## Install
 
 First you need to clone and after that run the command bellow to install all dependences:
@@ -33,10 +44,28 @@ REACT_APP_MARVEL_API_KEY={YOUR_API_PUBLIC_KEY}
 
 You can simply copy the contents of the `.env.sample` to a new `.env` file.
 
-### !!! ATENTION: NEVER COMMIT YOUR `.env` FILES !!!
+### !!! ATENTION: DOT NOT COMMIT YOUR ENVIROMENT (`.env`) FILES !!!
 
 
 This application is provided with hot reload in any code edition and linters to help maitain the pattern.
+
+## Running with Docker:
+
+Build
+
+### `docker-compose build`
+
+Run 
+
+### `docker-compose up react-app`
+
+Stop Container
+
+### `docker-compose stop`
+
+Remove container
+
+### `docker-compose down`
 
 ## Tests
 
