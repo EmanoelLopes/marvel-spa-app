@@ -61,3 +61,10 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
+
+## Performance
+
+This application aims to meet the requirements of [Core Web Vitals](https://web.dev/vitals/?gclid=EAIaIQobChMIzcPQr9SG8AIVjIiRCh1GVgY-EAAYASAAEgL4IfD_BwE).
+You can check the performance of the application through [Pagespeed](https://developers.google.com/speed/pagespeed/insights/?hl=pt-br&url=https%3A%2F%2Fmarvelapiheroes.netlify.app%2F).
+
+![Pagespeed](public/performance-pagespeed.png?v=4&s=250)
