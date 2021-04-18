@@ -12,6 +12,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 * [Styled Components](https://www.styled-components.com/)
 * [Eslint](https://eslint.org/)
 * [Prettier](https://prettier.io/)
+* [Husky](https://github.com/typicode/husky)
 * [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 * [Cypress](https://www.cypress.io/)
 * [Docker](https://www.docker.com/)
@@ -19,22 +20,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Install
 
-First you need to clone and after that run the command bellow to install all dependences:
+First you need to clone and then, run the command bellow to install all dependences:
 
 ### `yarn install`
 
-## Run
-
-To run the project, execute:
-
-### `yarn start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
 ## !Important
 
-This application uses enviroment variables as the [Marvel API](https://developer.marvel.com/) apikey, so you need to include a `.env` file with the following `.env.sample` file:
+This application uses enviroment variables as the [Marvel API](https://developer.marvel.com/) key, so you need to include a `.env` file with the following `.env.sample` file:
 ```
 PORT=5001
 SKIP_PREFLIGHT_CHECK=true
@@ -42,24 +34,31 @@ REACT_APP_MARVEL_SERVICE_ENDPOINT=https://gateway.marvel.com/
 REACT_APP_MARVEL_API_KEY={YOUR_API_PUBLIC_KEY}
 ```
 
-You can simply copy the contents of the `.env.sample` to a new `.env` file.
+You can simply copy the contents of the `.env.sample` to a new `.env` file and add the API key at the `REACT_APP_MARVEL_API_KEY` variable.
 
 ### !!! ATENTION: DOT NOT COMMIT YOUR ENVIROMENT (`.env`) FILES !!!
 
+## Run
 
+To execute the project:
+
+### `yarn start`
+
+App will run in the development mode.<br />
+Open [http://localhost:5001](http://localhost:5001) to view it in the browser.
 This application is provided with hot reload in any code edition and linters to help maitain the pattern.
 
 ## Running with Docker:
 
-Build
+Build image and create container
 
 ### `docker-compose build`
 
-Run 
+Run application
 
 ### `docker-compose up react-app`
 
-Stop Container
+Stop container
 
 ### `docker-compose stop`
 
@@ -71,15 +70,15 @@ Remove container
 
 This application is also provided with unit tests and end-to-end tests.
 
-To run unit tests:
+Unit tests:
 
 ### `yarn test:unit`
 
 
- To run e2e tests:
+ End-to-ened tests:
 ### `yarn test:e2e`
 
-Launches the [Cypress](https://docs.cypress.io/) test runner to run the End to End Tests. Important: your application should be running on background to execute e2e tests properly.
+Launches the [Cypress](https://docs.cypress.io/) test runner to run the End-to-end Tests. Important: your application should be running on background to execute e2e tests properly.
 
 ## Production Build
 
