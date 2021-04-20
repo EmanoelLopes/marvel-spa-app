@@ -103,15 +103,15 @@ export function Pagination({ onPageChange }) {
           </S.PaginationButton>
         </S.PaginationItem>
         {getPageRange()
-          .map((value) => (
-            <S.PaginationItem key={value}>
+          .map((page) => (
+            <S.PaginationItem key={page}>
               <S.PaginationButton
-                data-testid={`msh--pagination-button-page-${value}`}
-                disabled={currentPage === (value)}
-                isActive={(value) === currentPage}
-                onClick={() => handlePagination(value)}
+                data-testid={`msh--pagination-button-page-${page}`}
+                disabled={currentPage === page}
+                isActive={currentPage === page}
+                onClick={() => handlePagination(page)}
               >
-                {value}
+                {page}
               </S.PaginationButton>
             </S.PaginationItem>
           ))}
