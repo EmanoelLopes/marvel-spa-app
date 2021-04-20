@@ -7,7 +7,7 @@ export function Header() {
   return (
     <S.HeaderHome data-testid="msh--header">
       <Link to="/">
-        <img src={Logo} alt="Marvel" />
+        <img loading="lazy" src={Logo} alt="Marvel" width="300" height="100" />
       </Link>
       <h1>Explore o Universo</h1>
       <p>

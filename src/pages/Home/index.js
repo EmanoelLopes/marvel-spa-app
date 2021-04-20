@@ -109,6 +109,7 @@ export function Home() {
   };
 
   const toggleSorted = () => {
+    if (showOnlyFavorites) return false;
     setIsSorted((isSorted) => !isSorted);
     setHeroes(heroes.reverse());
   };
