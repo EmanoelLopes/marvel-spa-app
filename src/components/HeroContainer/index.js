@@ -22,7 +22,7 @@ export function HeroContainer({ data }) {
                 )
             )}
           </S.List>
-          <Link to="/">Voltar para a página inicial</Link>
+          <Link data-testid="msh--back-to-home" to="/">Voltar para a página inicial</Link>
         </article>
         <article>
           {data.thumbnail && (

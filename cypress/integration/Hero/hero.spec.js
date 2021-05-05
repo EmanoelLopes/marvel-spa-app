@@ -31,8 +31,7 @@ context('[Página de Personagem]', () => {
 
   describe('Link para voltar a página inicial', () => {
     it('Deve conter o link para voltar a página inicial', () => {
-      cy.visit('/hero/1011334');
-      cy.get('a').eq(1).should('have.text', 'Voltar para a página inicial');
+      cy.get('[data-testid="msh--back-to-home"]').should('have.text', 'Voltar para a página inicial');
     });
   });
 });
